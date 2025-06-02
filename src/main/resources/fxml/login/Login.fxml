@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../../styles/login_style/login.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="FXMLControllers.LoginController" />
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="AnchorPane" stylesheets="@../../styles/login_style/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.login.LoginController">
+   <children>
+      <Label layoutX="508.0" layoutY="196.0" prefHeight="23.0" prefWidth="278.0" text="Bienvenido al sistema MAHN 3.0" />
+      <GridPane alignment="CENTER" layoutX="476.0" layoutY="267.0" prefHeight="123.0" prefWidth="328.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="140.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="188.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField promptText="Nombre de usuario" GridPane.columnIndex="1">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <PasswordField promptText="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </PasswordField>
+            <Label text="Usuario:" />
+            <Label text="Contraseña:" GridPane.rowIndex="1" />
+            <CheckBox mnemonicParsing="false" text="Mostrar contraseña" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Button layoutX="508.0" layoutY="458.0" mnemonicParsing="false" text="Iniciar sesion" />
+      <Button layoutX="677.0" layoutY="458.0" mnemonicParsing="false" styleClass="Button_Register" stylesheets="@../../styles/login_style/login.css" text="Registrarse" />
+      <Label layoutX="508.0" layoutY="412.0" prefHeight="23.0" prefWidth="278.0" text="Error:" />
+   </children>
+</AnchorPane>

@@ -1,7 +1,62 @@
-/*
- * Empty Stylesheet file.
- */
+AnchorPane {
+    -fx-background-color: linear-gradient(to bottom, #f0f4f7, #d9e2ec);
+    -fx-font-family: "Segoe UI", sans-serif;
+}
 
-.mainFxmlClass {
+Label {
+    -fx-font-size: 18px;
+    -fx-text-fill: #2a2e35;
+    -fx-font-weight: bold;
+}
 
+GridPane Label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-font-weight: normal;
+}
+
+TextField, PasswordField {
+    -fx-pref-width: 180px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: #b0c4de;
+    -fx-border-width: 1;
+    -fx-background-color: #ffffff;
+}
+
+CheckBox {
+    -fx-font-size: 12px;
+    -fx-text-fill: #555;
+}
+
+GridPane > Label[text="Error:"] {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+}
+
+Button {
+    -fx-font-size: 14px;
+    -fx-background-color: #3b5998;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 6 20 6 20;
+}
+
+.Button_Register {
+    -fx-background-color: #4caf50;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 6 20 6 20;
+}
+
+Button:hover {
+    -fx-background-color: #2d4373;
+}
+
+.Button_Register:hover {
+    -fx-background-color: #45a049;
 }

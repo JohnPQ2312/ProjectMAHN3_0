@@ -4,9 +4,18 @@
  */
 package FXMLControllers.admin;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -15,12 +24,105 @@ import javafx.fxml.Initializable;
  */
 public class MainMenuAdminController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private AnchorPane mainContent;
+    
+    @FXML
+    private Label userLbl, roleLbl, screenLbl;
+    
+    @FXML
+    private Button openMuseums, openRooms, openCollections, openSpecies, openThemes, openPrices, openPaymentMethods, openUsers, openRoomImages, systemExit;
+    
+    @FXML
+    private void exit() {
+        Platform.exit();
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
     
+    @FXML
+    private void handleNavigation(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String viewKey = clickedButton.getId();
+        loadView(viewKey);
+    }
+    
+    @FXML
+    public void loadView(String key) {
+        String fxmlPath = null;
+
+        switch (key) {
+            case "openMuseums":
+                screenLbl.setText("Pantalla actual: Museos");
+                fxmlPath = "/fxml/admin/MuseumManager.fxml";
+                break;
+            case "openRooms":
+                screenLbl.setText("Pantalla actual: Salas");
+                fxmlPath = "/fxml/admin/RoomManager.fxml";
+                break;
+            case "openUsers":
+                screenLbl.setText("Pantalla actual: Usuarios");
+                fxmlPath = "/fxml/admin/UserManager.fxml";
+                break;
+            case "openCollections":
+                screenLbl.setText("Pantalla actual: Colecciones");
+                fxmlPath = "/fxml/admin/CollectionManager.fxml";
+                break;
+            case "openSpecies":
+                screenLbl.setText("Pantalla actual: Especies");
+                fxmlPath = "/fxml/admin/SpeciesManager.fxml";
+                break;
+            case "openThemes":
+                screenLbl.setText("Pantalla actual: Tematicas");
+                fxmlPath = "/fxml/admin/ThemeManager.fxml";
+                break;
+            case "openPrices":
+                screenLbl.setText("Pantalla actual: Precios");
+                fxmlPath = "/fxml/admin/PriceManager.fxml";
+                break;
+            case "openPaymentMethods":
+                screenLbl.setText("Pantalla actual: Metodos de pago");
+                fxmlPath = "/fxml/admin/PaymentMethodManager.fxml";
+                break;
+            case "reporte de entradas":
+                screenLbl.setText("Pantalla actual: Reporte de entradas");
+                fxmlPath = "/fxml/report/EntryReport.fxml";
+                break;
+            case "reporte de reseñas":
+                screenLbl.setText("Pantalla actual: Reporte de reseñas");
+                fxmlPath = "/fxml/report/ReviewReport.fxml";
+                break;
+            case "reporte de comisiones":
+                screenLbl.setText("Pantalla actual: Reporte de comisiones");
+                fxmlPath = "/fxml/report/CommissionReport.fxml";
+                break;
+            case "reporte de ventas":
+                screenLbl.setText("Pantalla actual: Reporte de ventas");
+                fxmlPath = "/fxml/report/SaleReport.fxml";
+                break;
+            case "openRoomImages":
+                screenLbl.setText("Pantalla actual: Imagenes de salas");
+                fxmlPath = "/fxml/admin/RoomImageManager.fxml";
+                break;                
+            default:
+                System.out.println("Vista no reconocida: " + key);
+                return;
+        }
+
+        if (fxmlPath == null) {
+            System.out.println("Vista no reconocida: " + key);
+            return;
+        }
+
+        try {
+            Parent view = FXMLLoader.load(getClass().getResource(fxmlPath));
+            mainContent.getChildren().setAll(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

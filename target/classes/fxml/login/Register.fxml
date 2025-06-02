@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.login.RegisterController">
-    <stylesheets>
-        <URL value="@/styles/login_style/register.css"/>
-    </stylesheets>
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" stylesheets="@../../styles/login_style/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.login.RegisterController">
+
+   <children>
+      <Label layoutX="542.0" layoutY="140.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Crear cuenta - MAHN 3.0" />
+      
+      <GridPane alignment="CENTER" hgap="10" layoutX="480.0" layoutY="210.0" prefHeight="300.0" prefWidth="360.0" vgap="15">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="140.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="200.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints prefHeight="30.0" />
+            <RowConstraints prefHeight="30.0" />
+            <RowConstraints prefHeight="30.0" />
+            <RowConstraints prefHeight="30.0" />
+            <RowConstraints prefHeight="30.0" />
+            <RowConstraints prefHeight="30.0" />
+         </rowConstraints>
+
+         <Label text="Usuario:" />
+         <TextField fx:id="nameField" promptText="Nombre de usuario" GridPane.columnIndex="1">
+            <cursor>
+               <Cursor fx:constant="TEXT" />
+            </cursor>
+         </TextField>
+
+         <Label text="Correo:" GridPane.rowIndex="1" />
+         <TextField fx:id="emailField" promptText="Correo electrónico" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+         <Label text="Contraseña:" GridPane.rowIndex="2" />
+         <PasswordField fx:id="passwordField" promptText="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+         <Label text="Confirmar:" GridPane.rowIndex="3" />
+         <PasswordField fx:id="confirmPasswordField" promptText="Repetir contraseña" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+         <Label fx:id="errorLabel" text="Error:" textFill="red" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+         <Button onAction="#handleRegister" text="Registrarse" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      </GridPane>
+   </children>
 </AnchorPane>
