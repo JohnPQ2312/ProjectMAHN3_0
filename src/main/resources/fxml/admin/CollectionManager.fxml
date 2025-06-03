@@ -1,8 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="FXMLControllers.admin.CollectionManagerController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.CollectionManagerController">
 
+    <children>
+        <Label layoutX="464.0" layoutY="51.0" text="MANTENIMIENTO" />
+
+        <TableView fx:id="collectionsTable" layoutX="40.0" layoutY="171.0" prefHeight="346.0" prefWidth="962.0">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="180.0" text="NOMBRE" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="280.0" text="DESCRIPCIÓN" />
+                <TableColumn fx:id="centuryColumn" prefWidth="120.0" text="SIGLO" />
+                <TableColumn fx:id="roomColumn" prefWidth="240.0" text="SALA" />
+                <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID" />
+            </columns>
+        </TableView>
+
+        <Label layoutX="254.0" layoutY="104.0" text="FILTRO 1:" />
+        <TextField fx:id="filterTextField" layoutX="307.0" layoutY="100.0" promptText="NOMBRE O SIGLO" />
+
+        <Label layoutX="519.0" layoutY="104.0" text="FILTRO 2:" />
+        <ComboBox fx:id="roomFilterComboBox" layoutX="572.0" layoutY="100.0" prefWidth="200.0" promptText="SALA" />
+
+        <Button fx:id="clearFiltersBtn" layoutX="835.0" layoutY="100.0" mnemonicParsing="false" text="LIMPIAR FILTROS" />
+
+        <Label layoutX="426.0" layoutY="526.0" text="ESPACIO PARA AGREGAR O EDITAR" />
+
+        <Label layoutX="111.0" layoutY="562.0" text="NOMBRE" />
+        <TextField fx:id="editName" disable="true" layoutX="60.0" layoutY="579.0" prefHeight="25.0" prefWidth="150.0" />
+
+        <Label layoutX="317.0" layoutY="562.0" text="DESCRIPCIÓN" />
+        <TextField fx:id="editDescription" disable="true" layoutX="243.0" layoutY="579.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Label layoutX="505.0" layoutY="562.0" text="SIGLO" />
+        <TextField fx:id="editCentury" disable="true" layoutX="471.0" layoutY="579.0" prefHeight="25.0" prefWidth="100.0" />
+
+        <Label layoutX="721.0" layoutY="562.0" text="SALA" />
+        <ComboBox fx:id="editRoom" disable="true" layoutX="635.0" layoutY="579.0" prefHeight="25.0" prefWidth="200.0" />
+
+        <Button fx:id="editBtn" disable="true" layoutX="264.0" layoutY="655.0" text="MODIFICAR" />
+        <Button fx:id="eraseBtn" disable="true" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" />
+        <Button fx:id="saveChangesBtn" disable="true" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" />
+        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" />
+        <Button fx:id="saveNewBtn" disable="true" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" />
+    </children>
 </AnchorPane>

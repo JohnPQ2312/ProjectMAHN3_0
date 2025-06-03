@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.SpeciesManagerController">
+<AnchorPane prefHeight="720.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.SpeciesManagerController">
 
+    <children>
+        <Label layoutX="464.0" layoutY="51.0" text="MANTENIMIENTO" />
+
+        <TableView fx:id="speciesTable" layoutX="24.0" layoutY="171.0" prefHeight="346.0" prefWidth="982.0">
+            <columns>
+                <TableColumn fx:id="scientificNameColumn" prefWidth="180.0" text="NOMBRE CIENTÍFICO" />
+                <TableColumn fx:id="commonNameColumn" prefWidth="140.0" text="NOMBRE COMÚN" />
+                <TableColumn fx:id="extinctionDateColumn" prefWidth="120.0" text="EXTINCIÓN" />
+                <TableColumn fx:id="periodColumn" prefWidth="120.0" text="PERIODO" />
+                <TableColumn fx:id="weightColumn" prefWidth="100.0" text="PESO (kg)" />
+                <TableColumn fx:id="featuresColumn" prefWidth="200.0" text="CARACTERÍSTICAS" />
+                <TableColumn fx:id="collectionColumn" prefWidth="120.0" text="COLECCIÓN" />
+            </columns>
+        </TableView>
+
+        <Label layoutX="256.0" layoutY="104.0" text="FILTRO 1:" />
+        <TextField fx:id="filterTextField" layoutX="309.0" layoutY="100.0" promptText="Nombre común o científico" />
+
+        <Label layoutX="521.0" layoutY="104.0" text="FILTRO 2:" />
+        <ComboBox fx:id="collectionFilterComboBox" layoutX="574.0" layoutY="100.0" prefWidth="200.0" promptText="COLECCIÓN" />
+
+        <Button fx:id="clearFiltersBtn" layoutX="835.0" layoutY="100.0" text="LIMPIAR FILTROS" />
+
+        <Label layoutX="426.0" layoutY="526.0" text="ESPACIO PARA AGREGAR O EDITAR" />
+
+        <Label layoutX="40.0" layoutY="562.0" text="N. CIENTÍFICO" />
+        <TextField fx:id="editScientificName" layoutX="30.0" layoutY="579.0" prefWidth="140.0" />
+
+        <Label layoutX="190.0" layoutY="562.0" text="N. COMÚN" />
+        <TextField fx:id="editCommonName" layoutX="180.0" layoutY="579.0" prefWidth="120.0" />
+
+        <Label layoutX="320.0" layoutY="562.0" text="EXTINCIÓN" />
+        <DatePicker fx:id="editExtinctionDate" layoutX="300.0" layoutY="579.0" prefWidth="130.0" />
+
+        <Label layoutX="450.0" layoutY="562.0" text="PERIODO" />
+        <TextField fx:id="editPeriod" layoutX="430.0" layoutY="579.0" prefWidth="100.0" />
+
+        <Label layoutX="550.0" layoutY="562.0" text="PESO (kg)" />
+        <TextField fx:id="editWeight" layoutX="530.0" layoutY="579.0" prefWidth="90.0" />
+
+        <Label layoutX="640.0" layoutY="562.0" text="CARACTERÍSTICAS" />
+        <TextField fx:id="editFeatures" layoutX="620.0" layoutY="579.0" prefWidth="180.0" />
+
+        <Label layoutX="820.0" layoutY="562.0" text="COLECCIÓN" />
+        <ComboBox fx:id="editCollection" layoutX="790.0" layoutY="579.0" prefWidth="180.0" />
+
+        <Button fx:id="editBtn" layoutX="264.0" layoutY="655.0" text="MODIFICAR" />
+        <Button fx:id="eraseBtn" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" />
+        <Button fx:id="saveChangesBtn" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" />
+        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" />
+        <Button fx:id="saveNewBtn" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" />
+    </children>
 </AnchorPane>

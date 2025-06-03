@@ -7,8 +7,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.EntryReportController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.report.EntryReportController">
     <stylesheets>
-        <URL value="@/styles/admin_side_style/entryreport.css"/>
+        <URL value="@/styles/report_style/entryreport.css"/>
     </stylesheets>
 </AnchorPane>

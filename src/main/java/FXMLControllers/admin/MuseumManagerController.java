@@ -63,7 +63,7 @@ public class MuseumManagerController implements Initializable {
     @FXML private ComboBox<String> typeFilterComboBox;
     
     @FXML
-    private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn;
+    private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
 
     private final MuseumsCRUD museumsCRUD = new MuseumsCRUD();
     
@@ -156,6 +156,12 @@ public class MuseumManagerController implements Initializable {
             return matchesText && matchesType;
         });
     }
+    
+    @FXML
+    private void clearFiltersBtnAction() {
+        filterTextField.clear();
+        typeFilterComboBox.setValue(null);
+    }
 
     private void populateEditFields(Museums m) {
         editName.setText(m.getName());
@@ -214,7 +220,7 @@ public class MuseumManagerController implements Initializable {
             return;
         }
         
-        if ((!editType.getText().equalsIgnoreCase("Arte")) || (!editType.getText().equalsIgnoreCase("Historia")) || (!editType.getText().equalsIgnoreCase("Musical")) || (!editType.getText().equalsIgnoreCase("Militar"))){
+        if ((!editType.getText().equalsIgnoreCase("Arte")) && (!editType.getText().equalsIgnoreCase("Historia")) && (!editType.getText().equalsIgnoreCase("Musical")) && (!editType.getText().equalsIgnoreCase("Militar"))){
             showAlert("El tipo de museo no es de los tipos permitidos (Arte, Historia, Musical, Militar)");
             return;
         }

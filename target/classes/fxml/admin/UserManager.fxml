@@ -1,12 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.UserManagerController">
+<AnchorPane prefHeight="720.0" prefWidth="1030.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="FXMLControllers.admin.UserManagerController">
+    <children>
+        <TableView fx:id="userTable" layoutX="101.0" layoutY="169.0" prefHeight="346.0" prefWidth="871.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="70.0" text="ID" />
+                <TableColumn fx:id="nameColumn" prefWidth="200.0" text="NOMBRE" />
+                <TableColumn fx:id="emailColumn" prefWidth="200.0" text="CORREO" />
+                <TableColumn fx:id="roleColumn" prefWidth="100.0" text="ROL" />
+                <TableColumn fx:id="phoneColumn" prefWidth="150.0" text="TELÉFONO" />
+                <TableColumn fx:id="registrationDateColumn" prefWidth="150.0" text="REGISTRO" />
+            </columns>
+        </TableView>
+        
+        <Label layoutX="178.0" layoutY="107.0" text="FILTRO 1:" />
+        <TextField fx:id="filterTextField" layoutX="231.0" layoutY="103.0" promptText="Nombre o Correo" />
 
+        <Label layoutX="443.0" layoutY="107.0" text="FILTRO 2:" />
+        <ComboBox fx:id="roleFilterComboBox" layoutX="496.0" layoutY="103.0" prefWidth="200.0" promptText="ROL" />
+
+        <Button fx:id="clearFiltersBtn" layoutX="757.0" layoutY="103.0" text="LIMPIAR FILTROS" />
+
+        <Label layoutX="488.0" layoutY="55.0" text="MANTENIMIENTO" />
+
+        <Label layoutX="426.0" layoutY="526.0" text="ESPACIO PARA AGREGAR O EDITAR" />
+        <Label layoutX="136.0" layoutY="562.0" text="NOMBRE" />
+        <TextField fx:id="editName" disable="true" layoutX="60.0" layoutY="579.0" prefWidth="200.0" />
+
+        <Label layoutX="413.0" layoutY="562.0" text="CORREO" />
+        <TextField fx:id="editEmail" disable="true" layoutX="336.0" layoutY="579.0" prefWidth="200.0" />
+
+        <Label layoutX="653.0" layoutY="562.0" text="ROL" />
+        <TextField fx:id="editRole" disable="true" layoutX="614.0" layoutY="579.0" prefWidth="100.0" />
+
+        <Label layoutX="824.0" layoutY="562.0" text="TELÉFONO" />
+        <TextField fx:id="editPhone" disable="true" layoutX="778.0" layoutY="579.0" prefWidth="150.0" />
+
+        <Button fx:id="editBtn" disable="true" layoutX="264.0" layoutY="655.0" text="MODIFICAR" />
+        <Button fx:id="eraseBtn" disable="true" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" />
+        <Button fx:id="saveChangesBtn" disable="true" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" />
+        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" />
+        <Button fx:id="saveNewBtn" disable="true" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" />
+    </children>
 </AnchorPane>

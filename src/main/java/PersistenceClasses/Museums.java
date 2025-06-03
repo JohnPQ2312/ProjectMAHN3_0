@@ -162,7 +162,7 @@ public class Museums implements Serializable {
 
     @Override
     public String toString() {
-        return "PersistenceClasses.Museums[ id=" + id + " ]";
+        return id + " - " + name;
     }
     
 }

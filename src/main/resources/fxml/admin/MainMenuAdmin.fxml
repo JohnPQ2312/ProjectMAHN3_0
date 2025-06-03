@@ -35,6 +35,7 @@
                      <content>
                         <VBox prefHeight="219.0" prefWidth="244.0" spacing="5.0">
                            <children>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="VALIDAR ENTRADA" />
                               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="COMPRAR ENTRADA" />
                               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="ADMINISTRAR ENTRADA" />
                            </children>
@@ -54,10 +55,10 @@
                      <content>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE ENTRADAS" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE RESEÑAS" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE COMISIONES" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE VENTAS" />
+                              <Button fx:id="openEntryReports" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE ENTRADAS" />
+                              <Button fx:id="openReviewReports" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE RESEÑAS" />
+                              <Button fx:id="openCommissionReports" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE COMISIONES" />
+                              <Button fx:id="openSaleReports" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="REPORTE DE VENTAS" />
                            </children>
                         </VBox>
                      </content>

@@ -31,7 +31,7 @@ public class MainMenuAdminController implements Initializable {
     private Label userLbl, roleLbl, screenLbl;
     
     @FXML
-    private Button openMuseums, openRooms, openCollections, openSpecies, openThemes, openPrices, openPaymentMethods, openUsers, openRoomImages, systemExit;
+    private Button openMuseums, openRooms, openCollections, openSpecies, openThemes, openPrices, openPaymentMethods, openUsers, openRoomImages, openEntryReports, openReviewReports, openCommissionReports, openSaleReports, systemExit;
     
     @FXML
     private void exit() {
@@ -87,19 +87,19 @@ public class MainMenuAdminController implements Initializable {
                 screenLbl.setText("Pantalla actual: Metodos de pago");
                 fxmlPath = "/fxml/admin/PaymentMethodManager.fxml";
                 break;
-            case "reporte de entradas":
+            case "openEntryReports":
                 screenLbl.setText("Pantalla actual: Reporte de entradas");
                 fxmlPath = "/fxml/report/EntryReport.fxml";
                 break;
-            case "reporte de reseñas":
+            case "openReviewReports":
                 screenLbl.setText("Pantalla actual: Reporte de reseñas");
                 fxmlPath = "/fxml/report/ReviewReport.fxml";
                 break;
-            case "reporte de comisiones":
+            case "openCommissionReports":
                 screenLbl.setText("Pantalla actual: Reporte de comisiones");
                 fxmlPath = "/fxml/report/CommissionReport.fxml";
                 break;
-            case "reporte de ventas":
+            case "openSaleReports":
                 screenLbl.setText("Pantalla actual: Reporte de ventas");
                 fxmlPath = "/fxml/report/SaleReport.fxml";
                 break;

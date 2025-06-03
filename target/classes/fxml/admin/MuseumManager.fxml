@@ -45,5 +45,6 @@
       <Button fx:id="saveChangesBtn" disable="true" layoutX="354.0" layoutY="655.0" mnemonicParsing="false" onAction="#saveChangesBtnAction" text="GUARDAR CAMBIOS" />
       <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" mnemonicParsing="false" onAction="#addNewBtnAction" text="AGREGAR NUEVO" />
       <Button fx:id="saveNewBtn" disable="true" layoutX="871.0" layoutY="655.0" mnemonicParsing="false" onAction="#saveNewBtnAction" text="GUARDAR NUEVO" />
+      <Button fx:id="clearFiltersBtn" layoutX="835.0" layoutY="100.0" mnemonicParsing="false" onAction="#clearFiltersBtnAction" text="LIMPIAR FILTROS" />
    </children>
 </AnchorPane>
