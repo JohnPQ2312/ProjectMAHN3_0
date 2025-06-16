@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.client.PurchaseEntryScreenController">
-    <stylesheets>
-        <URL value="@/styles/client_side_style/purchaseentryscreen.css"/>
-    </stylesheets>
+<AnchorPane prefHeight="720.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.client.PurchaseEntryScreenController">
+
+    <children>
+        <Label layoutX="459.0" layoutY="51.0" text="VENTA DE ENTRADAS" />
+
+        <Label layoutX="93.0" layoutY="104.0" text="NOMBRE VISITANTE:" />
+        <TextField fx:id="visitorNameField" editable="false" layoutX="213.0" layoutY="100.0" prefWidth="180.0" />
+
+        <Label layoutX="423.0" layoutY="104.0" text="TIPO TARJETA:" />
+        <ComboBox fx:id="cardTypeField" layoutX="523.0" layoutY="100.0" prefWidth="150.0" promptText="Seleccione el tipo" />
+
+        <Label layoutX="703.0" layoutY="104.0" text="MUSEO:" />
+        <ComboBox fx:id="museumComboBox" layoutX="763.0" layoutY="100.0" prefWidth="180.0" promptText="Seleccione museo" />
+
+        <Label layoutX="175.0" layoutY="170.0" text="SALA:" />
+        <ComboBox fx:id="roomComboBox" layoutX="225.0" layoutY="166.0" prefWidth="180.0" promptText="Seleccione sala" />
+
+        <Label layoutX="435.0" layoutY="170.0" text="FECHA VISITA:" />
+        <DatePicker fx:id="visitDatePicker" layoutX="525.0" layoutY="166.0" prefWidth="130.0" />
+
+        <Button fx:id="addEntryButton" layoutX="692.0" layoutY="166.0" text="AGREGAR" />
+
+        <TableView fx:id="entriesTable" layoutX="134.0" layoutY="218.0" prefHeight="376.0" prefWidth="779.0">
+            <columns>
+                <TableColumn fx:id="museumColumn" prefWidth="220.0" text="MUSEO" />
+                <TableColumn fx:id="roomColumn" prefWidth="180.0" text="SALA" />
+                <TableColumn fx:id="dateColumn" prefWidth="180.0" text="FECHA VISITA" />
+                <TableColumn fx:id="daysColumn" prefWidth="80.0" text="DÍAS" />
+                <TableColumn fx:id="priceColumn" prefWidth="120.0" text="PRECIO" />
+            </columns>
+        </TableView>
+
+        <Label layoutX="148.0" layoutY="611.0" text="SUBTOTAL:" />
+        <Label fx:id="subtotalLabel" layoutX="238.0" layoutY="611.0" text="0 euros" />
+
+        <Label layoutX="145.0" layoutY="639.0" text="IVA (Por tipo):" />
+        <Label fx:id="ivaLabel" layoutX="242.0" layoutY="639.0" text="0 euros" />
+
+        <Label layoutX="143.0" layoutY="668.0" text="TOTAL A PAGAR:" />
+        <Label fx:id="totalLabel" layoutX="264.0" layoutY="668.0" text="0.00 euros" />
+
+        <Button fx:id="sellButton" disable="true" layoutX="783.0" layoutY="619.0" prefHeight="40.0" prefWidth="130.0" text="VENDER" />
+      <Button fx:id="deleteEntryButton" disable="true" layoutX="804.0" layoutY="166.0" text="ELIMINAR" />
+    </children>
 </AnchorPane>

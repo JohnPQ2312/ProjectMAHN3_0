@@ -1,0 +1,6 @@
+//Credenciales del usuario de PL/SQL para correcta conexión entre Docker, NetBeans y PL/SQL
+Username = JPerez
+Password = 1234
+Database = localhost:1521/XE
+Connect as = Normal
+

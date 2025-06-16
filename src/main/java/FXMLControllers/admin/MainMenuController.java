@@ -22,7 +22,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author jp570
  */
-public class MainMenuAdminController implements Initializable {
+public class MainMenuController implements Initializable {
 
     @FXML
     private AnchorPane mainContent;
@@ -32,6 +32,9 @@ public class MainMenuAdminController implements Initializable {
     
     @FXML
     private Button openMuseums, openRooms, openCollections, openSpecies, openThemes, openPrices, openPaymentMethods, openUsers, openRoomImages, openEntryReports, openReviewReports, openCommissionReports, openSaleReports, systemExit;
+    
+    @FXML
+    private Button openEntryScanner, openPurchaseEntry, openReviewScreen, openSellEntry;
     
     @FXML
     private void exit() {
@@ -88,25 +91,41 @@ public class MainMenuAdminController implements Initializable {
                 fxmlPath = "/fxml/admin/PaymentMethodManager.fxml";
                 break;
             case "openEntryReports":
-                screenLbl.setText("Pantalla actual: Reporte de entradas");
+                screenLbl.setText("Pantalla actual: Reporte entradas");
                 fxmlPath = "/fxml/report/EntryReport.fxml";
                 break;
             case "openReviewReports":
-                screenLbl.setText("Pantalla actual: Reporte de reseñas");
+                screenLbl.setText("Pantalla actual: Reporte reseñas");
                 fxmlPath = "/fxml/report/ReviewReport.fxml";
                 break;
             case "openCommissionReports":
-                screenLbl.setText("Pantalla actual: Reporte de comisiones");
+                screenLbl.setText("Pantalla actual: Reporte comisiones");
                 fxmlPath = "/fxml/report/CommissionReport.fxml";
                 break;
             case "openSaleReports":
-                screenLbl.setText("Pantalla actual: Reporte de ventas");
+                screenLbl.setText("Pantalla actual: Reporte ventas");
                 fxmlPath = "/fxml/report/SaleReport.fxml";
                 break;
             case "openRoomImages":
-                screenLbl.setText("Pantalla actual: Imagenes de salas");
+                screenLbl.setText("Pantalla actual: Imagenes salas");
                 fxmlPath = "/fxml/admin/RoomImageManager.fxml";
-                break;                
+                break;     
+            case "openEntryScanner":
+                screenLbl.setText("Pantalla actual: Validacion");
+                fxmlPath = "/fxml/client/EntryScanner.fxml";
+                break; 
+            case "openPurchaseEntry":
+                screenLbl.setText("Pantalla actual: Compra entradas");
+                fxmlPath = "/fxml/client/PurchaseEntryScreen.fxml";
+                break; 
+            case "openReviewScreen":
+                screenLbl.setText("Pantalla actual: Reseñas");
+                fxmlPath = "/fxml/client/ReviewScreen.fxml";
+                break; 
+            case "openSellEntry":
+                screenLbl.setText("Pantalla actual: Admin entradas");
+                fxmlPath = "/fxml/client/SellEntry.fxml";
+                break;                 
             default:
                 System.out.println("Vista no reconocida: " + key);
                 return;
@@ -119,6 +138,7 @@ public class MainMenuAdminController implements Initializable {
 
         try {
             Parent view = FXMLLoader.load(getClass().getResource(fxmlPath));
+            mainContent.setMaxSize(1030, 720);
             mainContent.getChildren().setAll(view);
         } catch (IOException e) {
             e.printStackTrace();

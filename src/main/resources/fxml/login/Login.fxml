@@ -25,16 +25,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField promptText="Nombre de usuario" GridPane.columnIndex="1">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
-            </TextField>
-            <PasswordField promptText="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <cursor>
-                  <Cursor fx:constant="TEXT" />
-               </cursor>
-            </PasswordField>
+            <TextField promptText="Nombre de usuario" GridPane.columnIndex="1"/>
+            <PasswordField promptText="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
             <Label text="Usuario:" />
             <Label text="Contraseña:" GridPane.rowIndex="1" />
             <CheckBox mnemonicParsing="false" text="Mostrar contraseña" GridPane.rowIndex="2" />

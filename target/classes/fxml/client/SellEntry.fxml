@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.client.SellEntryController">
-    <stylesheets>
-        <URL value="@/styles/client_side_style/sellentry.css"/>
-    </stylesheets>
+<AnchorPane prefHeight="720.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.client.SellEntryController">
+
+    <children>
+        <Label layoutX="410.0" layoutY="40.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="GESTIÓN DE ENTRADAS" />
+
+        <Label layoutX="194.0" layoutY="107.0" text="Tus entradas:" />
+
+        <TableView fx:id="myTicketsTable" layoutX="194.0" layoutY="124.0" prefHeight="400.0" prefWidth="642.0">
+            <columns>
+                <TableColumn fx:id="ticketIdColumn" prefWidth="60.0" text="ID" />
+                <TableColumn fx:id="museumColumn" prefWidth="150.0" text="MUSEO" />
+                <TableColumn fx:id="roomColumn" prefWidth="120.0" text="SALA" />
+                <TableColumn fx:id="dateColumn" prefWidth="120.0" text="FECHA" />
+                <TableColumn fx:id="priceColumn" prefWidth="90.0" text="PRECIO" />
+                <TableColumn fx:id="statusColumn" prefWidth="100.0" text="ESTADO" />
+            </columns>
+        </TableView>
+
+        <Button fx:id="transferButton" disable="true" layoutX="194.0" layoutY="574.0" prefWidth="160.0" text="TRANSFERIR ENTRADA" />
+        <Button fx:id="refundButton" disable="true" layoutX="194.0" layoutY="536.0" prefWidth="160.0" text="SOLICITAR REEMBOLSO" />
+
+        <Label fx:id="transferToLabel" layoutX="363.0" layoutY="578.0" text="Transferir a (correo):" visible="false" />
+        <TextField fx:id="receiverField" layoutX="479.0" layoutY="574.0" prefWidth="250.0" promptText="Ingrese destinatario" visible="false" />
+        <Button fx:id="confirmTransferButton" layoutX="363.0" layoutY="605.0" text="CONFIRMAR TRANSFERENCIA" visible="false" />
+        
+        <Label fx:id="statusLabel" layoutX="80.0" layoutY="650.0" style="-fx-text-fill: green;" text="" />
+    </children>
 </AnchorPane>

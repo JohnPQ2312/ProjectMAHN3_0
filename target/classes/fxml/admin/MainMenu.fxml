@@ -7,9 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.MainMenuAdminController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.MainMenuController">
    <children>
-      <AnchorPane fx:id="mainContent" layoutX="249.0" prefHeight="720.0" prefWidth="1030.0" style="-fx-border-color: black;" />
       <AnchorPane fx:id="sideBar" prefHeight="720.0" prefWidth="246.0" style="-fx-border-color: black;">
          <children>
             <Accordion layoutX="1.0" layoutY="204.0" prefHeight="153.0" prefWidth="246.0">
@@ -35,8 +34,9 @@
                      <content>
                         <VBox prefHeight="219.0" prefWidth="244.0" spacing="5.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="COMPRAR ENTRADA" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="ADMINISTRAR ENTRADA" />
+                              <Button fx:id="openEntryScanner" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="VALIDAR ENTRADA" />
+                              <Button fx:id="openPurchaseEntry" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="COMPRAR ENTRADA" />
+                              <Button fx:id="openSellEntry" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="ADMINISTRAR ENTRADA" />
                            </children>
                         </VBox>
                      </content>
@@ -45,7 +45,7 @@
                      <content>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="236.0" text="VALORAR VISITA" />
+                              <Button fx:id="openReviewScreen" mnemonicParsing="false" onAction="#handleNavigation" prefHeight="25.0" prefWidth="236.0" text="VALORAR VISITA" />
                            </children>
                         </VBox>
                      </content>
@@ -64,11 +64,12 @@
                   </TitledPane>
               </panes>
             </Accordion>
-            <Label layoutX="105.0" layoutY="42.0" text="Usuario:" />
+            <Label fx:id="userLbl" layoutX="105.0" layoutY="42.0" text="Usuario:" />
             <Label fx:id="screenLbl" layoutX="44.0" layoutY="137.0" text="Pantalla actual: Menu Principal" />
-            <Label layoutX="82.0" layoutY="75.0" text="Tipo de usuario:" />
+            <Label fx:id="roleLbl" layoutX="82.0" layoutY="75.0" text="Tipo de usuario:" />
             <Button fx:id="systemExit" layoutX="73.0" layoutY="657.0" mnemonicParsing="false" onAction="#exit" text="Salir del sistema" />
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="mainContent" layoutX="249.0" prefHeight="720.0" prefWidth="1030.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

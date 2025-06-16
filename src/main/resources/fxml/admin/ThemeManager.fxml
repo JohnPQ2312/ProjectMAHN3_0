@@ -23,16 +23,14 @@
             </columns>
         </TableView>
 
-        <!-- Filtros -->
         <Label layoutX="280.0" layoutY="104.0" text="FILTRO 1:" />
         <TextField fx:id="filterTextField" layoutX="333.0" layoutY="100.0" promptText="Nombre o características" />
 
         <Label layoutX="545.0" layoutY="104.0" text="FILTRO 2:" />
         <ComboBox fx:id="roomFilterComboBox" layoutX="598.0" layoutY="100.0" prefWidth="200.0" promptText="SALA" />
 
-        <Button fx:id="clearFiltersBtn" layoutX="835.0" layoutY="100.0" text="LIMPIAR FILTROS" />
+        <Button fx:id="clearFiltersBtn" layoutX="835.0" layoutY="100.0" text="LIMPIAR FILTROS" onAction="#clearFiltersBtnAction" />
 
-        <!-- Formulario -->
         <Label layoutX="426.0" layoutY="526.0" text="ESPACIO PARA AGREGAR O EDITAR" />
 
         <Label layoutX="136.0" layoutY="562.0" text="NOMBRE" />
@@ -47,11 +45,10 @@
         <Label layoutX="811.0" layoutY="562.0" text="SALA" />
         <ComboBox fx:id="editRoom" layoutX="710.0" layoutY="579.0" prefWidth="230.0" />
 
-        <!-- Botones -->
-        <Button fx:id="editBtn" layoutX="264.0" layoutY="655.0" text="MODIFICAR" />
-        <Button fx:id="eraseBtn" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" />
-        <Button fx:id="saveChangesBtn" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" />
-        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" />
-        <Button fx:id="saveNewBtn" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" />
+        <Button fx:id="editBtn" layoutX="264.0" layoutY="655.0" text="MODIFICAR" onAction="#editBtnAction" />
+        <Button fx:id="eraseBtn" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" onAction="#eraseBtnAction" />
+        <Button fx:id="saveChangesBtn" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" onAction="#saveChangesBtnAction" />
+        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" onAction="#addNewBtnAction" />
+        <Button fx:id="saveNewBtn" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" onAction="#saveNewBtnAction" />
     </children>
 </AnchorPane>

@@ -29,7 +29,7 @@
         <Label layoutX="519.0" layoutY="104.0" text="FILTRO 2:" />
         <ComboBox fx:id="roomFilterComboBox" layoutX="572.0" layoutY="100.0" prefWidth="200.0" promptText="SALA" />
 
-        <Button fx:id="clearFiltersBtn" layoutX="835.0" layoutY="100.0" mnemonicParsing="false" text="LIMPIAR FILTROS" />
+        <Button fx:id="clearFiltersBtn" layoutX="835.0" layoutY="100.0" mnemonicParsing="false" onAction="#clearFiltersBtnAction" text="LIMPIAR FILTROS" />
 
         <Label layoutX="426.0" layoutY="526.0" text="ESPACIO PARA AGREGAR O EDITAR" />
 
@@ -45,10 +45,10 @@
         <Label layoutX="721.0" layoutY="562.0" text="SALA" />
         <ComboBox fx:id="editRoom" disable="true" layoutX="635.0" layoutY="579.0" prefHeight="25.0" prefWidth="200.0" />
 
-        <Button fx:id="editBtn" disable="true" layoutX="264.0" layoutY="655.0" text="MODIFICAR" />
-        <Button fx:id="eraseBtn" disable="true" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" />
-        <Button fx:id="saveChangesBtn" disable="true" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" />
-        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" />
-        <Button fx:id="saveNewBtn" disable="true" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" />
+        <Button fx:id="editBtn" disable="true" layoutX="264.0" layoutY="655.0" onAction="#editBtnAction" text="MODIFICAR" />
+        <Button fx:id="eraseBtn" disable="true" layoutX="40.0" layoutY="655.0" onAction="#eraseBtnAction" text="BORRAR SELECCIONADO" />
+        <Button fx:id="saveChangesBtn" disable="true" layoutX="354.0" layoutY="655.0" onAction="#saveChangesBtnAction" text="GUARDAR CAMBIOS" />
+        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" onAction="#addNewBtnAction" text="AGREGAR NUEVO" />
+        <Button fx:id="saveNewBtn" disable="true" layoutX="871.0" layoutY="655.0" onAction="#saveNewBtnAction" text="GUARDAR NUEVO" />
     </children>
 </AnchorPane>

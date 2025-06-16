@@ -27,7 +27,7 @@
         <Label layoutX="443.0" layoutY="107.0" text="FILTRO 2:" />
         <ComboBox fx:id="roleFilterComboBox" layoutX="496.0" layoutY="103.0" prefWidth="200.0" promptText="ROL" />
 
-        <Button fx:id="clearFiltersBtn" layoutX="757.0" layoutY="103.0" text="LIMPIAR FILTROS" />
+        <Button fx:id="clearFiltersBtn" layoutX="757.0" layoutY="103.0" text="LIMPIAR FILTROS" onAction="#clearFiltersBtnAction" />
 
         <Label layoutX="488.0" layoutY="55.0" text="MANTENIMIENTO" />
 
@@ -44,10 +44,10 @@
         <Label layoutX="824.0" layoutY="562.0" text="TELÉFONO" />
         <TextField fx:id="editPhone" disable="true" layoutX="778.0" layoutY="579.0" prefWidth="150.0" />
 
-        <Button fx:id="editBtn" disable="true" layoutX="264.0" layoutY="655.0" text="MODIFICAR" />
-        <Button fx:id="eraseBtn" disable="true" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" />
-        <Button fx:id="saveChangesBtn" disable="true" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" />
-        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" />
-        <Button fx:id="saveNewBtn" disable="true" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" />
+        <Button fx:id="editBtn" disable="true" layoutX="264.0" layoutY="655.0" text="MODIFICAR" onAction="#editBtnAction" />
+        <Button fx:id="eraseBtn" disable="true" layoutX="40.0" layoutY="655.0" text="BORRAR SELECCIONADO" onAction="#eraseBtnAction" />
+        <Button fx:id="saveChangesBtn" disable="true" layoutX="354.0" layoutY="655.0" text="GUARDAR CAMBIOS" onAction="#saveChangesBtnAction" />
+        <Button fx:id="addNewBtn" layoutX="749.0" layoutY="655.0" text="AGREGAR NUEVO" onAction="#addNewBtnAction" />
+        <Button fx:id="saveNewBtn" disable="true" layoutX="871.0" layoutY="655.0" text="GUARDAR NUEVO" onAction="#saveNewBtnAction" />
     </children>
 </AnchorPane>

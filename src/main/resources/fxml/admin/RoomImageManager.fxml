@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLControllers.admin.RoomImageManagerController">
 
@@ -24,17 +23,15 @@
             </columns>
         </TableView>
 
-        <ImageView fx:id="previewImage" fitHeight="279.0" fitWidth="296.0" layoutX="682.0" layoutY="163.0" preserveRatio="true" />
+                            <ImageView fx:id="previewImage" fitHeight="314.0" fitWidth="339.0" layoutX="660.0" layoutY="139.0" preserveRatio="true" />
 
         <Label layoutX="40.0" layoutY="70.0" text="FILTRO POR SALA:" />
         <ComboBox fx:id="roomFilterComboBox" layoutX="150.0" layoutY="65.0" prefWidth="250.0" promptText="Seleccionar sala" />
 
-        <Button fx:id="clearFiltersBtn" layoutX="420.0" layoutY="65.0" text="LIMPIAR FILTROS" />
 
         <Label layoutX="44.0" layoutY="518.0" text="ARCHIVO" />
         <TextField fx:id="editPath" editable="false" layoutX="104.0" layoutY="513.0" prefWidth="400.0" />
 
-        <Button fx:id="browseBtn" layoutX="524.0" layoutY="513.0" text="EXAMINAR..." />
 
         <Label layoutX="40.0" layoutY="570.0" text="DESCRIPCIÓN" />
         <TextField fx:id="editDescription" layoutX="130.0" layoutY="565.0" prefWidth="390.0" />
@@ -42,11 +39,12 @@
         <Label layoutX="562.0" layoutY="570.0" text="SALA" />
         <ComboBox fx:id="editRoomComboBox" layoutX="612.0" layoutY="565.0" prefWidth="200.0" />
 
-        <Button fx:id="editBtn" layoutX="260.0" layoutY="633.0" text="MODIFICAR" />
-        <Button fx:id="eraseBtn" layoutX="40.0" layoutY="633.0" text="BORRAR SELECCIONADO" />
-        <Button fx:id="saveChangesBtn" layoutX="360.0" layoutY="633.0" text="GUARDAR CAMBIOS" />
-        <Button fx:id="addNewBtn" layoutX="660.0" layoutY="633.0" text="AGREGAR NUEVO" />
-        <Button fx:id="saveNewBtn" layoutX="790.0" layoutY="633.0" text="GUARDAR NUEVO" />
-      <Pane layoutX="660.0" layoutY="146.0" prefHeight="314.0" prefWidth="339.0" style="-fx-background-color: gray;" />
+        <Button fx:id="addNewBtn" layoutX="660.0" layoutY="633.0" onAction="#addNewBtnAction" text="AGREGAR NUEVO" />
+        <Button fx:id="saveNewBtn" layoutX="790.0" layoutY="633.0" onAction="#saveNewBtnAction" text="GUARDAR NUEVO" />
+        <Button fx:id="editBtn" layoutX="260.0" layoutY="633.0" onAction="#editBtnAction" text="MODIFICAR" />
+        <Button fx:id="saveChangesBtn" layoutX="360.0" layoutY="633.0" onAction="#saveChangesBtnAction" text="GUARDAR CAMBIOS" />
+        <Button fx:id="eraseBtn" layoutX="40.0" layoutY="633.0" onAction="#eraseBtnAction" text="BORRAR SELECCIONADO" />
+        <Button fx:id="browseBtn" layoutX="524.0" layoutY="513.0" onAction="#handleBrowseImage" text="EXAMINAR..." />
+        <Button fx:id="clearFiltersBtn" layoutX="420.0" layoutY="65.0" onAction="#clearFiltersBtnAction" text="LIMPIAR FILTROS" />
     </children>
 </AnchorPane>

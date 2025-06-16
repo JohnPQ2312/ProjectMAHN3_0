@@ -175,7 +175,7 @@ public class Rooms implements Serializable {
 
     @Override
     public String toString() {
-        return "PersistenceClasses.Rooms[ id=" + id + " ]";
+        return id + " - " + name;
     }
     
 }

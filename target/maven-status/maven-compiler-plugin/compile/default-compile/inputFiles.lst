@@ -1,5 +1,5 @@
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\CollectionManagerController.java
-C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\MainMenuAdminController.java
+C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\MainMenuController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\MuseumManagerController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\PaymentMethodManagerController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\PriceManagerController.java
@@ -8,8 +8,10 @@ C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMA
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\SpeciesManagerController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\ThemeManagerController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\admin\UserManagerController.java
+C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\auxclasses\RoomImageLoader.java
+C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\auxclasses\RoomImagesHelper.java
+C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\auxclasses\UserSession.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\client\EntryScannerController.java
-C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\client\MainMenuClientController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\client\PurchaseEntryScreenController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\client\PurchaseSuccessScreenController.java
 C:\Users\jp570\OneDrive - Universidad Nacional de Costa Rica\Documents\ProjectMAHN3_0\src\main\java\FXMLControllers\client\ReviewScreenController.java

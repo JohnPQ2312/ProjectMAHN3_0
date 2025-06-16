@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("admin/MainMenuAdmin"), 1280, 720);
+        scene = new Scene(loadFXML("admin/MainMenu"), 1280, 720);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Museo Americano de Historia Nacional");
