@@ -36,21 +36,23 @@
                 <TableColumn fx:id="museumColumn" prefWidth="220.0" text="MUSEO" />
                 <TableColumn fx:id="roomColumn" prefWidth="180.0" text="SALA" />
                 <TableColumn fx:id="dateColumn" prefWidth="180.0" text="FECHA VISITA" />
-                <TableColumn fx:id="daysColumn" prefWidth="80.0" text="DÍAS" />
+                <TableColumn fx:id="daysColumn" prefWidth="80.0" text="DÍAS RESTANTES" />
                 <TableColumn fx:id="priceColumn" prefWidth="120.0" text="PRECIO" />
             </columns>
         </TableView>
 
-        <Label layoutX="148.0" layoutY="611.0" text="SUBTOTAL:" />
-        <Label fx:id="subtotalLabel" layoutX="238.0" layoutY="611.0" text="0 euros" />
+        <Label layoutX="148.0" layoutY="602.0" text="SUBTOTAL:" />
+        <Label fx:id="subtotalLabel" layoutX="238.0" layoutY="602.0" text="0 euros" />
 
-        <Label layoutX="145.0" layoutY="639.0" text="IVA (Por tipo):" />
-        <Label fx:id="ivaLabel" layoutX="242.0" layoutY="639.0" text="0 euros" />
+        <Label layoutX="151.0" layoutY="631.0" text="IVA (13%):" />
+        <Label fx:id="ivaLabel" layoutX="242.0" layoutY="631.0" text="0 euros" />
 
-        <Label layoutX="143.0" layoutY="668.0" text="TOTAL A PAGAR:" />
-        <Label fx:id="totalLabel" layoutX="264.0" layoutY="668.0" text="0.00 euros" />
+        <Label layoutX="145.0" layoutY="682.0" text="TOTAL A PAGAR:" />
+        <Label fx:id="totalLabel" layoutX="266.0" layoutY="682.0" text="0.00 euros" />
 
         <Button fx:id="sellButton" disable="true" layoutX="783.0" layoutY="619.0" prefHeight="40.0" prefWidth="130.0" text="VENDER" />
       <Button fx:id="deleteEntryButton" disable="true" layoutX="804.0" layoutY="166.0" text="ELIMINAR" />
+      <Label layoutX="130.0" layoutY="659.0" text="Comision (Tipo tarjeta):" />
+      <Label fx:id="commissionLabel" layoutX="262.0" layoutY="659.0" text="0 euros" />
     </children>
 </AnchorPane>

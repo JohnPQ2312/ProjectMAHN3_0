@@ -69,4 +69,29 @@ public class EntriesCRUD {
             em.close();
         }
     }
+
+    public Entries getEntryByQrCode(String qrCode) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            List<Entries> result = em.createQuery(
+                    "SELECT e FROM Entries e WHERE e.qrCode = :qrCode", Entries.class)
+                    .setParameter("qrCode", qrCode)
+                    .getResultList();
+            return result.isEmpty() ? null : result.get(0);
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Entries> getEntriesByPurchaseId(BigDecimal purchaseId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT e FROM Entries e WHERE e.purchases.id = :purchaseId", Entries.class)
+                    .setParameter("purchaseId", purchaseId)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

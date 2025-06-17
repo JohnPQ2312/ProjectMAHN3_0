@@ -4,10 +4,11 @@ import PersistenceCRUD.UsersCRUD;
 import PersistenceClasses.Users;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,6 +26,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class UserManagerController implements Initializable {
+
+    private static final Set<String> ALLOWED_ROLES = new HashSet<>(Arrays.asList("client", "admin"));
 
     @FXML
     private TableView<Users> userTable;
@@ -64,7 +67,7 @@ public class UserManagerController implements Initializable {
         phoneColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getPhone()));
         registrationDateColumn.setCellValueFactory(cellData
                 -> new SimpleObjectProperty<>(cellData.getValue().getRegistrationDate())
-        );        
+        );
 
         disableAllEditFields();
         editBtn.setDisable(true);
@@ -90,7 +93,7 @@ public class UserManagerController implements Initializable {
     }
 
     private void loadRoleCombo() {
-        roleFilterComboBox.setItems(FXCollections.observableArrayList("ADMIN", "USER", "STAFF"));
+        roleFilterComboBox.setItems(FXCollections.observableArrayList("ADMIN", "CLIENT"));
     }
 
     private void loadFilteredUsers() {
@@ -172,10 +175,16 @@ public class UserManagerController implements Initializable {
             return;
         }
 
+        String role = editRole.getText().trim().toLowerCase();
+        if (!ALLOWED_ROLES.contains(role)) {
+            showAlert("El rol debe ser 'client' o 'admin'.");
+            return;
+        }
+
         Users u = new Users();
         u.setName(editName.getText().trim());
         u.setEmail(editEmail.getText().trim());
-        u.setRole(editRole.getText().trim());
+        u.setRole(role);
         u.setPhone(editPhone.getText().trim());
         u.setRegistrationDate(new Date());
 
@@ -215,9 +224,15 @@ public class UserManagerController implements Initializable {
             return;
         }
 
+        String role = editRole.getText().trim().toLowerCase();
+        if (!ALLOWED_ROLES.contains(role)) {
+            showAlert("El rol debe ser 'client' o 'admin'.");
+            return;
+        }
+
         selected.setName(editName.getText().trim());
         selected.setEmail(editEmail.getText().trim());
-        selected.setRole(editRole.getText().trim());
+        selected.setRole(role);
         selected.setPhone(editPhone.getText().trim());
 
         usersCRUD.updateUser(selected);

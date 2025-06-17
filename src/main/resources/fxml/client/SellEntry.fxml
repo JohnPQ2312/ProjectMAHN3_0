@@ -14,7 +14,7 @@
 
         <Label layoutX="194.0" layoutY="107.0" text="Tus entradas:" />
 
-        <TableView fx:id="myTicketsTable" layoutX="194.0" layoutY="124.0" prefHeight="400.0" prefWidth="642.0">
+        <TableView fx:id="myTicketsTable" layoutX="194.0" layoutY="124.0" onMouseClicked="#handleTableClick" prefHeight="400.0" prefWidth="642.0">
             <columns>
                 <TableColumn fx:id="ticketIdColumn" prefWidth="60.0" text="ID" />
                 <TableColumn fx:id="museumColumn" prefWidth="150.0" text="MUSEO" />
@@ -25,12 +25,12 @@
             </columns>
         </TableView>
 
-        <Button fx:id="transferButton" disable="true" layoutX="194.0" layoutY="574.0" prefWidth="160.0" text="TRANSFERIR ENTRADA" />
-        <Button fx:id="refundButton" disable="true" layoutX="194.0" layoutY="536.0" prefWidth="160.0" text="SOLICITAR REEMBOLSO" />
+        <Button fx:id="transferButton" disable="true" layoutX="194.0" layoutY="574.0" onAction="#handleTransferButton" prefWidth="160.0" text="TRANSFERIR ENTRADA" />
+        <Button fx:id="refundButton" disable="true" layoutX="194.0" layoutY="536.0" onAction="#handleRefund" prefWidth="160.0" text="SOLICITAR REEMBOLSO" />
 
         <Label fx:id="transferToLabel" layoutX="363.0" layoutY="578.0" text="Transferir a (correo):" visible="false" />
         <TextField fx:id="receiverField" layoutX="479.0" layoutY="574.0" prefWidth="250.0" promptText="Ingrese destinatario" visible="false" />
-        <Button fx:id="confirmTransferButton" layoutX="363.0" layoutY="605.0" text="CONFIRMAR TRANSFERENCIA" visible="false" />
+        <Button fx:id="confirmTransferButton" layoutX="363.0" layoutY="605.0" onAction="#handleConfirmTransfer" text="CONFIRMAR TRANSFERENCIA" visible="false" />
         
         <Label fx:id="statusLabel" layoutX="80.0" layoutY="650.0" style="-fx-text-fill: green;" text="" />
     </children>

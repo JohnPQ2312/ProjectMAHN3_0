@@ -11,7 +11,7 @@
         <Label layoutX="458.0" layoutY="51.0" text="VALIDAR ENTRADA" />
 
         <Label layoutX="160.0" layoutY="130.0" text="Adjunte su PDF con el código QR:" />
-        <Button fx:id="uploadPDFButton" layoutX="360.0" layoutY="125.0" prefWidth="200.0" text="Seleccionar archivo PDF" />
+        <Button fx:id="uploadPDFButton" layoutX="360.0" layoutY="125.0" onAction="#handleUploadPDF" prefWidth="200.0" text="Seleccionar archivo PDF" />
         <Label fx:id="selectedFileLabel" layoutX="580.0" layoutY="130.0" text="Ningún archivo seleccionado" />
 
         <Label layoutX="169.0" layoutY="177.0" text="Hoy puede ingresar a las siguientes salas:" />

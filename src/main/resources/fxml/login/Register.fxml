@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -29,21 +28,24 @@
             <RowConstraints prefHeight="30.0" />
          </rowConstraints>
 
-         <Label text="Usuario:" />
-         <TextField fx:id="nameField" promptText="Nombre de usuario" GridPane.columnIndex="1"/>
+         <Label text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+         <TextField fx:id="nameField" promptText="Nombre de usuario" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-         <Label text="Correo:" GridPane.rowIndex="1" />
+         <Label text="Correo:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
          <TextField fx:id="emailField" promptText="Correo electrónico" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-         <Label text="Contraseña:" GridPane.rowIndex="2" />
-         <PasswordField fx:id="passwordField" promptText="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <Label text="Contraseña:" GridPane.rowIndex="3" />
+         <PasswordField fx:id="passwordField" promptText="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-         <Label text="Confirmar:" GridPane.rowIndex="3" />
-         <PasswordField fx:id="confirmPasswordField" promptText="Repetir contraseña" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <Label text="Confirmar:" GridPane.rowIndex="4" />
+         <PasswordField fx:id="confirmPasswordField" promptText="Repetir contraseña" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-         <Label fx:id="errorLabel" text="Error:" textFill="red" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-         <Button onAction="#handleRegister" text="Registrarse" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         <Button layoutX="508.0" layoutY="458.0" mnemonicParsing="false" onAction="#backToLogin" text="Volver" GridPane.rowIndex="5" />
+         <Button fx:id="registerButton" onAction="#handleRegister" text="Registrarse" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         <Label text="Telefono:" GridPane.rowIndex="2" />
+         <TextField fx:id="phoneField" promptText="Teléfono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       </GridPane>
+
+      <Label fx:id="errorLabel" layoutX="530.0" layoutY="510.0" text="Error:" textFill="red" visible="false" />
    </children>
 </AnchorPane>

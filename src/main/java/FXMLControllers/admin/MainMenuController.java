@@ -4,6 +4,7 @@
  */
 package FXMLControllers.admin;
 
+import FXMLControllers.auxclasses.UserSession;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -26,33 +28,49 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private AnchorPane mainContent;
-    
+
     @FXML
     private Label userLbl, roleLbl, screenLbl;
-    
+
+    @FXML
+    private TitledPane maintenancePane, entriesPane, valuationPane, reportsPane;
+
     @FXML
     private Button openMuseums, openRooms, openCollections, openSpecies, openThemes, openPrices, openPaymentMethods, openUsers, openRoomImages, openEntryReports, openReviewReports, openCommissionReports, openSaleReports, systemExit;
-    
+
     @FXML
     private Button openEntryScanner, openPurchaseEntry, openReviewScreen, openSellEntry;
-    
+
+    private String user = UserSession.getCurrentUser().getName();
+    private String role = "client".equals(UserSession.getCurrentUser().getRole()) ? "CLIENTE" : "ADMIN";
+
     @FXML
     private void exit() {
         Platform.exit();
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        userLbl.setText("Usuario: " + user);
+        roleLbl.setText("Tipo de usuario: " + role);
+
+        if ("CLIENTE".equals(role)) {
+            if (maintenancePane != null) {
+                maintenancePane.setDisable(true);
+            }
+            if (reportsPane != null) {
+                reportsPane.setDisable(true);
+            }
+        }
+    }
+
     @FXML
     private void handleNavigation(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         String viewKey = clickedButton.getId();
         loadView(viewKey);
     }
-    
+
     @FXML
     public void loadView(String key) {
         String fxmlPath = null;
@@ -109,23 +127,23 @@ public class MainMenuController implements Initializable {
             case "openRoomImages":
                 screenLbl.setText("Pantalla actual: Imagenes salas");
                 fxmlPath = "/fxml/admin/RoomImageManager.fxml";
-                break;     
+                break;
             case "openEntryScanner":
                 screenLbl.setText("Pantalla actual: Validacion");
                 fxmlPath = "/fxml/client/EntryScanner.fxml";
-                break; 
+                break;
             case "openPurchaseEntry":
                 screenLbl.setText("Pantalla actual: Compra entradas");
                 fxmlPath = "/fxml/client/PurchaseEntryScreen.fxml";
-                break; 
+                break;
             case "openReviewScreen":
                 screenLbl.setText("Pantalla actual: Reseñas");
                 fxmlPath = "/fxml/client/ReviewScreen.fxml";
-                break; 
+                break;
             case "openSellEntry":
                 screenLbl.setText("Pantalla actual: Admin entradas");
                 fxmlPath = "/fxml/client/SellEntry.fxml";
-                break;                 
+                break;
             default:
                 System.out.println("Vista no reconocida: " + key);
                 return;

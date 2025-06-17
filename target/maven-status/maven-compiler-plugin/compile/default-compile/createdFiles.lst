@@ -20,6 +20,7 @@ program2\projectmahn3_0\App.class
 FXMLControllers\auxclasses\UserSession.class
 PersistenceCRUD\MuseumsCRUD.class
 PersistenceCRUD\PricesCRUD.class
+FXMLControllers\auxclasses\TicketUtils.class
 FXMLControllers\report\SaleReportController.class
 FXMLControllers\auxclasses\RoomImageLoader.class
 PersistenceClasses\Species.class
@@ -28,13 +29,16 @@ FXMLControllers\admin\SpeciesManagerController$1.class
 FXMLControllers\client\PurchaseEntryScreenController.class
 FXMLControllers\report\CommissionReportController.class
 PersistenceClasses\PaymentMethods.class
+FXMLControllers\auxclasses\QRUtils.class
 PersistenceCRUD\ThemesCRUD.class
 PersistenceCRUD\GenericCRUD_On_Testing.class
 FXMLControllers\admin\RoomImageManagerController.class
+FXMLControllers\auxclasses\PDFUtils.class
 PersistenceClasses\Rooms.class
 FXMLControllers\admin\RoomManagerController.class
 FXMLControllers\client\ReviewScreenController.class
 FXMLControllers\login\RegisterController.class
+FXMLControllers\client\PurchaseEntryScreenController$EntryRow.class
 PersistenceCRUD\PurchasesCRUD.class
 FXMLControllers\admin\MuseumManagerController$1.class
 FXMLControllers\admin\CollectionManagerController.class

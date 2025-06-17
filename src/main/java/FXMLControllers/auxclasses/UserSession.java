@@ -2,6 +2,7 @@ package FXMLControllers.auxclasses;
 
 import PersistenceClasses.Users;
 
+//Maneja una unica sesión en todo el programa
 public class UserSession {
 
     private static Users currentUser;

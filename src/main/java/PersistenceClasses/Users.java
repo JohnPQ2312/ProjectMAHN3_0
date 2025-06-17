@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package PersistenceClasses;
 
 import jakarta.persistence.Basic;
@@ -22,10 +18,6 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
-/**
- *
- * @author jp570
- */
 @Entity
 @Table(name = "USERS")
 @NamedQueries({
@@ -33,45 +25,53 @@ import java.util.Date;
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private BigDecimal id;
+
     @Basic(optional = false)
     @jakarta.validation.constraints.NotNull
     @jakarta.validation.constraints.Size(min = 1, max = 100)
     @Column(name = "NAME")
     private String name;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+
     @Basic(optional = false)
     @jakarta.validation.constraints.NotNull
     @jakarta.validation.constraints.Size(min = 1, max = 100)
     @Column(name = "EMAIL")
     private String email;
+
     @Basic(optional = false)
     @jakarta.validation.constraints.NotNull
     @jakarta.validation.constraints.Size(min = 1, max = 100)
     @Column(name = "PASSWORD")
     private String password;
+
     @jakarta.validation.constraints.Size(max = 20)
     @Column(name = "ROLE")
     private String role;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+
     @jakarta.validation.constraints.Size(max = 20)
     @Column(name = "PHONE")
     private String phone;
+
     @Column(name = "REGISTRATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date registrationDate;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Reviews> reviewsCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private Collection<Purchases> purchasesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
-    private Collection<Transfers> transfersCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users1")
-    private Collection<Transfers> transfersCollection1;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fromUser")
+    private Collection<Transfers> transfersFromCollection;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "toUser")
+    private Collection<Transfers> transfersToCollection;
 
     public Users() {
     }
@@ -159,20 +159,20 @@ public class Users implements Serializable {
         this.purchasesCollection = purchasesCollection;
     }
 
-    public Collection<Transfers> getTransfersCollection() {
-        return transfersCollection;
+    public Collection<Transfers> getTransfersFromCollection() {
+        return transfersFromCollection;
     }
 
-    public void setTransfersCollection(Collection<Transfers> transfersCollection) {
-        this.transfersCollection = transfersCollection;
+    public void setTransfersFromCollection(Collection<Transfers> transfersFromCollection) {
+        this.transfersFromCollection = transfersFromCollection;
     }
 
-    public Collection<Transfers> getTransfersCollection1() {
-        return transfersCollection1;
+    public Collection<Transfers> getTransfersToCollection() {
+        return transfersToCollection;
     }
 
-    public void setTransfersCollection1(Collection<Transfers> transfersCollection1) {
-        this.transfersCollection1 = transfersCollection1;
+    public void setTransfersToCollection(Collection<Transfers> transfersToCollection) {
+        this.transfersToCollection = transfersToCollection;
     }
 
     @Override
@@ -184,7 +184,6 @@ public class Users implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Users)) {
             return false;
         }
@@ -199,5 +198,4 @@ public class Users implements Serializable {
     public String toString() {
         return "PersistenceClasses.Users[ id=" + id + " ]";
     }
-    
 }

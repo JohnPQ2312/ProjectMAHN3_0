@@ -45,10 +45,10 @@ public class Transfers implements Serializable {
     private Entries entries;
     @JoinColumn(name = "FROM_USER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Users users;
+    private Users fromUser;
     @JoinColumn(name = "TO_USER_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Users users1;
+    private Users toUser;
 
     public Transfers() {
     }
@@ -81,20 +81,20 @@ public class Transfers implements Serializable {
         this.entries = entries;
     }
 
-    public Users getUsers() {
-        return users;
+    public Users getFromUser() {
+        return fromUser;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setFromUser(Users fromUser) {
+        this.fromUser = fromUser;
     }
 
-    public Users getUsers1() {
-        return users1;
+    public Users getToUser() {
+        return toUser;
     }
 
-    public void setUsers1(Users users1) {
-        this.users1 = users1;
+    public void setToUser(Users toUser) {
+        this.toUser = toUser;
     }
 
     @Override

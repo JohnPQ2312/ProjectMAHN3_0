@@ -10,7 +10,6 @@ public class PDFUtils {
     
     
     //Crea un PDF simple (título y texto).
-    
     public static void createSimplePdf(String pdfPath, String title, String body) throws Exception {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(pdfPath));
@@ -23,11 +22,6 @@ public class PDFUtils {
 
     
     //Crea un PDF con imagen (por ejemplo, un QR generado en runtime).
-    //pdfPath Ruta PDF destino.
-    //title Título.
-    //qrImage BufferedImage (puede venir de QrUtils).
-    //footer Texto opcional.
-    
     public static void createPdfWithImage(String pdfPath, String title, BufferedImage qrImage, String footer) throws Exception {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream(pdfPath));

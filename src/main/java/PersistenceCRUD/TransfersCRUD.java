@@ -1,11 +1,14 @@
 package PersistenceCRUD;
 
+import PersistenceClasses.Entries;
 import PersistenceClasses.Transfers;
+import PersistenceClasses.Users;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class TransfersCRUD {
@@ -18,6 +21,32 @@ public class TransfersCRUD {
             em.getTransaction().begin();
             em.persist(transfer);
             em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void registerTransfer(Entries entry, Users fromUser, Users toUser) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            entry.getPurchases().setUsers(toUser);
+            em.merge(entry);
+
+            Transfers transfer = new Transfers();
+            transfer.setEntries(entry);
+            transfer.setFromUser(fromUser);
+            transfer.setToUser(toUser);
+            transfer.setTransferDate(new Date());
+            em.persist(transfer);
+
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw ex;
         } finally {
             em.close();
         }
