@@ -175,7 +175,7 @@ public class Rooms implements Serializable {
 
     @Override
     public String toString() {
-        return id + " - " + name;
+        return name + " - " + getMuseums();
     }
     
 }

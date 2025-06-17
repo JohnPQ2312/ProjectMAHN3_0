@@ -13,7 +13,7 @@
         <Label layoutX="400.0" layoutY="30.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="VALORACIÓN DE SALAS" />
         <Label fx:id="dateLabel" layoutX="900.0" layoutY="30.0" text="FECHA" />
 
-        <Button fx:id="scanQRButton" layoutX="416.0" layoutY="105.0" prefWidth="180.0" text="LEA SU CÓDIGO QR AQUÍ" />
+        <Button fx:id="scanQRButton" layoutX="416.0" layoutY="105.0" onAction="#handleScanQRButton" prefWidth="180.0" text="LEA SU CÓDIGO QR AQUÍ" />
 
         <ImageView fx:id="mainImageView" fitHeight="271.0" fitWidth="260.0" layoutX="80.0" layoutY="111.0" preserveRatio="true" style="-fx-border-color:gray;" />
         <Label fx:id="speciesLabel" layoutX="143.0" layoutY="381.0" style="-fx-font-size: 14px;" text="ESPECIES / TEMÁTICA" />
@@ -24,14 +24,8 @@
         <Label layoutX="430.0" layoutY="187.0" style="-fx-font-weight: bold;" text="Nombre:" />
         <Label fx:id="roomNameLabel" layoutX="500.0" layoutY="187.0" text="-" />
 
-        <Label layoutX="430.0" layoutY="217.0" style="-fx-font-weight: bold;" text="Colección:" />
-        <Label fx:id="collectionLabel" layoutX="500.0" layoutY="217.0" text="-" />
-
-        <Label layoutX="430.0" layoutY="247.0" style="-fx-font-weight: bold;" text="Tipo:" />
-        <Label fx:id="typeLabel" layoutX="500.0" layoutY="247.0" text="-" />
-
-        <Label layoutX="430.0" layoutY="277.0" style="-fx-font-weight: bold;" text="Detalle:" />
-        <Label fx:id="detailLabel" layoutX="500.0" layoutY="277.0" prefWidth="370.0" text="-" wrapText="true" />
+        <Label layoutX="433.0" layoutY="232.0" style="-fx-font-weight: bold;" text="Detalle:" />
+        <Label fx:id="detailLabel" layoutX="500.0" layoutY="232.0" prefWidth="370.0" text="-" wrapText="true" />
 
         <Label layoutX="368.0" layoutY="454.0" style="-fx-font-weight:bold;" text="Promedio de valoración:" />
         <Label fx:id="avgRatingLabel" layoutX="528.0" layoutY="454.0" text="-" />
@@ -50,7 +44,7 @@
         <Label layoutX="80.0" layoutY="505.0" text="¿Desea agregar una observación?" />
         <TextArea fx:id="reviewTextArea" layoutX="80.0" layoutY="535.0" prefHeight="60.0" prefWidth="350.0" promptText="Escriba aquí su observación..." wrapText="true" />
 
-        <Button fx:id="submitReviewButton" layoutX="80.0" layoutY="605.0" text="ENVIAR VALORACIÓN" />
+        <Button fx:id="submitReviewButton" layoutX="80.0" layoutY="605.0" onAction="#handleSubmitReviewButton" text="ENVIAR VALORACIÓN" />
 
         <Label fx:id="statusLabel" layoutX="80.0" layoutY="630.0" style="-fx-text-fill: green;" text="" />
     </children>

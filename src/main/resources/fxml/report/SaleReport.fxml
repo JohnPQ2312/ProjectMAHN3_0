@@ -19,14 +19,13 @@
         <Button fx:id="generateButton" layoutX="600.0" layoutY="66.0" text="GENERAR REPORTE" />
         <Button fx:id="exportPdfButton" disable="true" layoutX="780.0" layoutY="66.0" text="EXPORTAR A PDF" />
 
-        <TableView fx:id="salesTable" layoutX="184.0" layoutY="122.0" prefHeight="500.0" prefWidth="633.0">
+        <TableView fx:id="salesTable" layoutX="177.0" layoutY="119.0" prefHeight="500.0" prefWidth="647.0">
             <columns>
-                <TableColumn fx:id="purchaseIdColumn" prefWidth="70.0" text="ID Compra" />
-                <TableColumn fx:id="userColumn" prefWidth="120.0" text="Usuario" />
-                <TableColumn fx:id="purchaseDateColumn" prefWidth="110.0" text="Fecha" />
-                <TableColumn fx:id="paymentMethodColumn" prefWidth="130.0" text="Método de pago" />
-                <TableColumn fx:id="totalAmountColumn" prefWidth="100.0" text="Total" />
-                <TableColumn fx:id="totalCommissionColumn" prefWidth="100.0" text="Comisión" />
+                <TableColumn fx:id="purchaseIdColumn" prefWidth="82.0" text="ID Compra" />
+                <TableColumn fx:id="purchaseDateColumn" prefWidth="151.0" text="Fecha" />
+                <TableColumn fx:id="paymentMethodColumn" prefWidth="139.0" text="Método de pago" />
+                <TableColumn fx:id="totalAmountColumn" prefWidth="115.0" text="Total" />
+                <TableColumn fx:id="totalCommissionColumn" prefWidth="158.0" text="Comisión" />
             </columns>
         </TableView>
     </children>
