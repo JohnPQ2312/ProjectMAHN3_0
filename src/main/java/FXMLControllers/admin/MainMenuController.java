@@ -20,9 +20,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * FXML Controller class
- *
- * @author jp570
+ * Main menu controller for the admin system.
+ * Handles navigation and role-based permissions.
  */
 public class MainMenuController implements Initializable {
 
@@ -36,7 +35,7 @@ public class MainMenuController implements Initializable {
     private TitledPane maintenancePane, entriesPane, valuationPane, reportsPane;
 
     @FXML
-    private Button openMuseums, openRooms, openCollections, openSpecies, openThemes, openPrices, openPaymentMethods, openUsers, openRoomImages, openEntryReports, openReviewReports, openCommissionReports, openSaleReports, systemExit;
+    private Button openMuseums, openRooms, openCollections, openSpecies, openThemes, openPrices, openPaymentMethods, openUsers, openRoomImages, openEntryReports, openReviewReports, openCommissionReports, openSaleReports;
 
     @FXML
     private Button openEntryScanner, openPurchaseEntry, openReviewScreen, openSellEntry;
@@ -44,16 +43,23 @@ public class MainMenuController implements Initializable {
     private String user = UserSession.getCurrentUser().getName();
     private String role = "client".equals(UserSession.getCurrentUser().getRole()) ? "CLIENTE" : "ADMIN";
 
+    /**
+     * Closes the application.
+     */
     @FXML
     private void exit() {
         Platform.exit();
     }
 
+    /**
+     * Initializes the menu, sets user info, and disables panes based on role.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         userLbl.setText("Usuario: " + user);
         roleLbl.setText("Tipo de usuario: " + role);
 
+        // Disable admin-only panes for clients
         if ("CLIENTE".equals(role)) {
             if (maintenancePane != null) {
                 maintenancePane.setDisable(true);
@@ -64,6 +70,9 @@ public class MainMenuController implements Initializable {
         }
     }
 
+    /**
+     * Handles navigation button clicks, loading the appropriate view.
+     */
     @FXML
     private void handleNavigation(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -71,6 +80,9 @@ public class MainMenuController implements Initializable {
         loadView(viewKey);
     }
 
+    /**
+     * Loads the corresponding FXML view into the main content pane.
+     */
     @FXML
     public void loadView(String key) {
         String fxmlPath = null;
@@ -154,6 +166,7 @@ public class MainMenuController implements Initializable {
             return;
         }
 
+        // Load and display the selected FXML view
         try {
             Parent view = FXMLLoader.load(getClass().getResource(fxmlPath));
             mainContent.setMaxSize(1030, 720);

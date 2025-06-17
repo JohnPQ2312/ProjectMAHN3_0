@@ -25,39 +25,34 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controller for managing users (CRUD, filtering, and table logic).
+ * Handles user records, role filtering, and ensures role validation.
+ */
 public class UserManagerController implements Initializable {
 
     private static final Set<String> ALLOWED_ROLES = new HashSet<>(Arrays.asList("client", "admin"));
 
-    @FXML
-    private TableView<Users> userTable;
+    @FXML private TableView<Users> userTable;
+    @FXML private TableColumn<Users, BigDecimal> idColumn;
+    @FXML private TableColumn<Users, String> nameColumn;
+    @FXML private TableColumn<Users, String> emailColumn;
+    @FXML private TableColumn<Users, String> roleColumn;
+    @FXML private TableColumn<Users, String> phoneColumn;
+    @FXML private TableColumn<Users, java.util.Date> registrationDateColumn;
 
-    @FXML
-    private TableColumn<Users, BigDecimal> idColumn;
-    @FXML
-    private TableColumn<Users, String> nameColumn;
-    @FXML
-    private TableColumn<Users, String> emailColumn;
-    @FXML
-    private TableColumn<Users, String> roleColumn;
-    @FXML
-    private TableColumn<Users, String> phoneColumn;
-    @FXML
-    private TableColumn<Users, Date> registrationDateColumn;
-
-    @FXML
-    private TextField editName, editEmail, editRole, editPhone, filterTextField;
-    @FXML
-    private ComboBox<String> roleFilterComboBox;
-
-    @FXML
-    private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
+    @FXML private TextField editName, editEmail, editRole, editPhone, filterTextField;
+    @FXML private ComboBox<String> roleFilterComboBox;
+    @FXML private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
 
     private final UsersCRUD usersCRUD = new UsersCRUD();
 
     private ObservableList<Users> masterList;
     private FilteredList<Users> filteredData;
 
+    /**
+     * Initializes the controller, sets up table columns, listeners, and disables editing until a selection is made.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -79,6 +74,7 @@ public class UserManagerController implements Initializable {
         loadRoleCombo();
         loadFilteredUsers();
 
+        // Table selection listener for enabling edit/delete and populating edit fields
         userTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 editBtn.setDisable(false);
@@ -92,10 +88,16 @@ public class UserManagerController implements Initializable {
         });
     }
 
+    /**
+     * Loads available roles into the role filter combo box.
+     */
     private void loadRoleCombo() {
         roleFilterComboBox.setItems(FXCollections.observableArrayList("ADMIN", "CLIENT"));
     }
 
+    /**
+     * Loads all users, sets up filtering by name/email and role, and sorting.
+     */
     private void loadFilteredUsers() {
         masterList = FXCollections.observableArrayList(usersCRUD.getAllUsers());
         filteredData = new FilteredList<>(masterList, p -> true);
@@ -108,6 +110,9 @@ public class UserManagerController implements Initializable {
         userTable.setItems(sortedList);
     }
 
+    /**
+     * Applies filters to the user list based on name/email and selected role.
+     */
     private void applyFilter() {
         String text = filterTextField.getText() == null ? "" : filterTextField.getText().toLowerCase();
         String role = roleFilterComboBox.getValue();
@@ -120,12 +125,18 @@ public class UserManagerController implements Initializable {
         });
     }
 
+    /**
+     * Clears all filters (text and role).
+     */
     @FXML
     private void clearFiltersBtnAction() {
         filterTextField.clear();
         roleFilterComboBox.setValue(null);
     }
 
+    /**
+     * Populates the edit fields with the selected user's data.
+     */
     private void populateEditFields(Users u) {
         editName.setText(u.getName());
         editEmail.setText(u.getEmail());
@@ -133,6 +144,9 @@ public class UserManagerController implements Initializable {
         editPhone.setText(u.getPhone());
     }
 
+    /**
+     * Clears all edit fields.
+     */
     private void clearEditFields() {
         editName.clear();
         editEmail.clear();
@@ -140,6 +154,9 @@ public class UserManagerController implements Initializable {
         editPhone.clear();
     }
 
+    /**
+     * Disables all edit fields.
+     */
     private void disableAllEditFields() {
         editName.setDisable(true);
         editEmail.setDisable(true);
@@ -147,6 +164,9 @@ public class UserManagerController implements Initializable {
         editPhone.setDisable(true);
     }
 
+    /**
+     * Enables all edit fields.
+     */
     private void enableAllEditFields() {
         editName.setDisable(false);
         editEmail.setDisable(false);
@@ -154,6 +174,9 @@ public class UserManagerController implements Initializable {
         editPhone.setDisable(false);
     }
 
+    /**
+     * Handler for the "Add New" button. Prepares form for new user entry.
+     */
     @FXML
     private void addNewBtnAction() {
         userTable.setDisable(true);
@@ -168,6 +191,10 @@ public class UserManagerController implements Initializable {
         saveChangesBtn.setDisable(true);
     }
 
+    /**
+     * Handler for "Save New" button. Validates and saves a new user.
+     * Ensures role is either 'client' or 'admin'.
+     */
     @FXML
     private void saveNewBtnAction() {
         if (editName.getText().trim().isEmpty()) {
@@ -200,6 +227,9 @@ public class UserManagerController implements Initializable {
         userTable.setDisable(false);
     }
 
+    /**
+     * Handler for the "Edit" button. Enables fields for editing the selected user.
+     */
     @FXML
     private void editBtnAction() {
         Users selected = userTable.getSelectionModel().getSelectedItem();
@@ -214,6 +244,10 @@ public class UserManagerController implements Initializable {
         saveChangesBtn.setDisable(false);
     }
 
+    /**
+     * Handler for "Save Changes" button. Updates the selected user with new data.
+     * Ensures role is valid.
+     */
     @FXML
     private void saveChangesBtnAction() {
         Users selected = userTable.getSelectionModel().getSelectedItem();
@@ -249,6 +283,9 @@ public class UserManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Handler for "Erase" button. Deletes the selected user.
+     */
     @FXML
     private void eraseBtnAction() {
         Users selected = userTable.getSelectionModel().getSelectedItem();
@@ -264,6 +301,9 @@ public class UserManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Utility to show information alerts.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

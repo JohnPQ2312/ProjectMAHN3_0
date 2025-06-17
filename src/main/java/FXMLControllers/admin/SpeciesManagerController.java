@@ -27,35 +27,25 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+/**
+ * Controller for managing species (CRUD, filtering, and table logic).
+ * Handles species records, including extinction dates and their collections.
+ */
 public class SpeciesManagerController implements Initializable {
 
-    @FXML
-    private TableView<Species> speciesTable;
+    @FXML private TableView<Species> speciesTable;
+    @FXML private TableColumn<Species, String> scientificNameColumn;
+    @FXML private TableColumn<Species, String> commonNameColumn;
+    @FXML private TableColumn<Species, Date> extinctionDateColumn;
+    @FXML private TableColumn<Species, String> periodColumn;
+    @FXML private TableColumn<Species, String> weightColumn;
+    @FXML private TableColumn<Species, String> featuresColumn;
+    @FXML private TableColumn<Species, String> collectionColumn;
 
-    @FXML
-    private TableColumn<Species, String> scientificNameColumn;
-    @FXML
-    private TableColumn<Species, String> commonNameColumn;
-    @FXML
-    private TableColumn<Species, Date> extinctionDateColumn;
-    @FXML
-    private TableColumn<Species, String> periodColumn;
-    @FXML
-    private TableColumn<Species, String> weightColumn;
-    @FXML
-    private TableColumn<Species, String> featuresColumn;
-    @FXML
-    private TableColumn<Species, String> collectionColumn;
-
-    @FXML
-    private TextField editScientificName, editCommonName, editPeriod, editWeight, editFeatures, filterTextField;
-    @FXML
-    private DatePicker editExtinctionDate;
-    @FXML
-    private ComboBox<Collections> editCollection, collectionFilterComboBox;
-
-    @FXML
-    private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
+    @FXML private TextField editScientificName, editCommonName, editPeriod, editWeight, editFeatures, filterTextField;
+    @FXML private DatePicker editExtinctionDate;
+    @FXML private ComboBox<Collections> editCollection, collectionFilterComboBox;
+    @FXML private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
 
     private final SpeciesCRUD speciesCRUD = new SpeciesCRUD();
     private final PersistenceCRUD.CollectionsCRUD collectionsCRUD = new PersistenceCRUD.CollectionsCRUD();
@@ -64,6 +54,9 @@ public class SpeciesManagerController implements Initializable {
     private FilteredList<Species> filteredData;
     private ObservableList<Collections> collectionsList;
 
+    /**
+     * Initializes the controller, sets up table columns, listeners, and disables editing until a selection is made.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         scientificNameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getScientificName()));
@@ -89,6 +82,7 @@ public class SpeciesManagerController implements Initializable {
         loadCollectionsCombo();
         loadFilteredSpecies();
 
+        // Table selection listener
         speciesTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 editBtn.setDisable(false);
@@ -101,6 +95,7 @@ public class SpeciesManagerController implements Initializable {
             }
         });
 
+        // Custom cell factory for extinction date formatting
         extinctionDateColumn.setCellFactory(column -> new TableCell<Species, Date>() {
             private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -117,12 +112,18 @@ public class SpeciesManagerController implements Initializable {
         });
     }
 
+    /**
+     * Loads all collections into combo boxes for filtering and editing.
+     */
     private void loadCollectionsCombo() {
         collectionsList = FXCollections.observableArrayList(collectionsCRUD.getAllCollections());
         collectionFilterComboBox.setItems(collectionsList);
         editCollection.setItems(collectionsList);
     }
 
+    /**
+     * Loads all species, sets up filtering by name and collection, and sorting.
+     */
     private void loadFilteredSpecies() {
         masterList = FXCollections.observableArrayList(speciesCRUD.getAllSpecies());
         filteredData = new FilteredList<>(masterList, p -> true);
@@ -135,6 +136,9 @@ public class SpeciesManagerController implements Initializable {
         speciesTable.setItems(sortedList);
     }
 
+    /**
+     * Applies filters to the species list based on scientific/common name and collection.
+     */
     private void applyFilter() {
         String text = filterTextField.getText() == null ? "" : filterTextField.getText().toLowerCase();
         Collections selectedCollection = collectionFilterComboBox.getValue();
@@ -148,12 +152,18 @@ public class SpeciesManagerController implements Initializable {
         });
     }
 
+    /**
+     * Clears all filters (text and collection).
+     */
     @FXML
     private void clearFiltersBtnAction() {
         filterTextField.clear();
         collectionFilterComboBox.setValue(null);
     }
 
+    /**
+     * Populates the edit fields with the selected species' data.
+     */
     private void populateEditFields(Species s) {
         editScientificName.setText(s.getScientificName());
         editCommonName.setText(s.getCommonName());
@@ -168,6 +178,9 @@ public class SpeciesManagerController implements Initializable {
         editCollection.setValue(s.getCollections());
     }
 
+    /**
+     * Clears all edit fields.
+     */
     private void clearEditFields() {
         editScientificName.clear();
         editCommonName.clear();
@@ -178,6 +191,9 @@ public class SpeciesManagerController implements Initializable {
         editCollection.setValue(null);
     }
 
+    /**
+     * Disables all edit fields.
+     */
     private void disableAllEditFields() {
         editScientificName.setDisable(true);
         editCommonName.setDisable(true);
@@ -188,6 +204,9 @@ public class SpeciesManagerController implements Initializable {
         editCollection.setDisable(true);
     }
 
+    /**
+     * Enables all edit fields.
+     */
     private void enableAllEditFields() {
         editScientificName.setDisable(false);
         editCommonName.setDisable(false);
@@ -198,6 +217,9 @@ public class SpeciesManagerController implements Initializable {
         editCollection.setDisable(false);
     }
 
+    /**
+     * Handler for the "Add New" button. Prepares form for new species entry.
+     */
     @FXML
     private void addNewBtnAction() {
         speciesTable.setDisable(true);
@@ -212,6 +234,9 @@ public class SpeciesManagerController implements Initializable {
         saveChangesBtn.setDisable(true);
     }
 
+    /**
+     * Handler for "Save New" button. Validates and saves a new species.
+     */
     @FXML
     private void saveNewBtnAction() {
         if (editScientificName.getText().trim().isEmpty()) {
@@ -250,6 +275,9 @@ public class SpeciesManagerController implements Initializable {
         speciesTable.setDisable(false);
     }
 
+    /**
+     * Handler for "Edit" button. Enables fields for editing the selected species.
+     */
     @FXML
     private void editBtnAction() {
         Species selected = speciesTable.getSelectionModel().getSelectedItem();
@@ -266,6 +294,9 @@ public class SpeciesManagerController implements Initializable {
         saveChangesBtn.setDisable(false);
     }
 
+    /**
+     * Handler for "Save Changes" button. Updates the selected species record.
+     */
     @FXML
     private void saveChangesBtnAction() {
         Species selected = speciesTable.getSelectionModel().getSelectedItem();
@@ -310,6 +341,9 @@ public class SpeciesManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Handler for "Erase" button. Deletes the selected species record.
+     */
     @FXML
     private void eraseBtnAction() {
         Species selected = speciesTable.getSelectionModel().getSelectedItem();
@@ -327,6 +361,9 @@ public class SpeciesManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Utility to show information alerts.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

@@ -21,11 +21,11 @@
         <Button fx:id="prevImageButton" layoutX="51.0" layoutY="240.0" prefHeight="25.0" prefWidth="29.0" text="&lt;" />
         <Button fx:id="nextImageButton" layoutX="342.0" layoutY="240.0" prefHeight="25.0" prefWidth="29.0" text="&gt;" />
 
-        <Label layoutX="430.0" layoutY="187.0" style="-fx-font-weight: bold;" text="Nombre:" />
-        <Label fx:id="roomNameLabel" layoutX="500.0" layoutY="187.0" text="-" />
+        <Label layoutX="433.0" layoutY="187.0" style="-fx-font-weight: bold;" text="Nombre de sala:" />
+        <Label fx:id="roomNameLabel" layoutX="533.0" layoutY="187.0" text="-" />
 
-        <Label layoutX="433.0" layoutY="232.0" style="-fx-font-weight: bold;" text="Detalle:" />
-        <Label fx:id="detailLabel" layoutX="500.0" layoutY="232.0" prefWidth="370.0" text="-" wrapText="true" />
+        <Label layoutX="433.0" layoutY="232.0" style="-fx-font-weight: bold;" text="Detalle de sala:" />
+        <Label fx:id="detailLabel" layoutX="528.0" layoutY="232.0" prefWidth="370.0" text="-" wrapText="true" />
 
         <Label layoutX="368.0" layoutY="454.0" style="-fx-font-weight:bold;" text="Promedio de valoración:" />
         <Label fx:id="avgRatingLabel" layoutX="528.0" layoutY="454.0" text="-" />

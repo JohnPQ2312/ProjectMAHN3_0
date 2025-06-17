@@ -25,6 +25,7 @@ FXMLControllers\report\SaleReportController.class
 FXMLControllers\auxclasses\RoomImageLoader.class
 PersistenceClasses\Species.class
 FXMLControllers\report\ReviewReportController.class
+FXMLControllers\report\ReviewReportController$RoomRatingSummary.class
 FXMLControllers\admin\SpeciesManagerController$1.class
 FXMLControllers\client\PurchaseEntryScreenController.class
 FXMLControllers\report\CommissionReportController.class

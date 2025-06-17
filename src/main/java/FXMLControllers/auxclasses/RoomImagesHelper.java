@@ -10,26 +10,35 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-
-//Clase auxiliar para seleccionar y copiar imágenes asociadas a RoomImages.
+/**
+ * Utility class for selecting, copying, and previewing images for RoomImages.
+ * Handles file dialogs, storage, and placeholder images.
+ */
 public class RoomImagesHelper {
 
     private static final String IMAGES_FOLDER = "images/rooms/";
     private static final String PLACEHOLDER_RESOURCE = "/images/placeholder.jpg";
 
-
-    //Abre un FileChooser para seleccionar una imagen y devuelve el archivo.
+    /**
+     * Opens a file chooser dialog for the user to select an image file.
+     *
+     * @return The selected File object, or null if cancelled
+     */
     public static File chooseImageFile() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar imagen de sala");
+        fileChooser.setTitle("Select Room Image");
         fileChooser.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
+            new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
         );
         return fileChooser.showOpenDialog(null);
     }
 
-
-    //Copia el archivo seleccionado a la carpeta de imágenes de la app, devolviendo la ruta.
+    /**
+     * Copies the selected image file to the application's image folder, using a unique name.
+     *
+     * @param sourceFile The original image file
+     * @return The destination file path, or null if copy fails
+     */
     public static String copyImageToAppFolder(File sourceFile) {
         try {
             File destDir = new File(IMAGES_FOLDER);
@@ -47,19 +56,28 @@ public class RoomImagesHelper {
 
             return destFile.getPath();
         } catch (IOException e) {
-            showError("No se pudo copiar la imagen: " + e.getMessage());
+            showError("Could not copy image: " + e.getMessage());
             return null;
         }
     }
 
-    //Devuelve una imagen de placeholder para vistas previas.
+    /**
+     * Returns a placeholder image for use in previews or when no image is available.
+     *
+     * @return The placeholder Image object
+     */
     public static Image getPlaceholderImage() {
         return new Image(RoomImagesHelper.class.getResourceAsStream(PLACEHOLDER_RESOURCE));
     }
 
+    /**
+     * Shows an error alert with the given message.
+     *
+     * @param msg The error message to display
+     */
     private static void showError(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Error de imagen");
+        alert.setHeaderText("Image Error");
         alert.setContentText(msg);
         alert.showAndWait();
     }

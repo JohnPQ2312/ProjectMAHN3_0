@@ -22,16 +22,18 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for managing images associated with rooms.
+ * Handles CRUD operations, filtering, previewing images, and file handling.
+ */
 public class RoomImageManagerController implements Initializable {
 
     @FXML private TableView<RoomImages> imageTable;
     @FXML private TableColumn<RoomImages, String> pathColumn;
     @FXML private TableColumn<RoomImages, String> descriptionColumn;
     @FXML private TableColumn<RoomImages, String> roomColumn;
-
     @FXML private ComboBox<Rooms> roomFilterComboBox;
     @FXML private Button clearFiltersBtn;
-
     @FXML private TextField editPath, editDescription;
     @FXML private ComboBox<Rooms> editRoomComboBox;
     @FXML private ImageView previewImage;
@@ -42,11 +44,14 @@ public class RoomImageManagerController implements Initializable {
     private ObservableList<RoomImages> masterList;
     private FilteredList<RoomImages> filteredData;
     private ObservableList<Rooms> roomsList;
-    private File selectedImageFile = null; // Para imagen nueva a cargar
+    private File selectedImageFile = null; // Stores the file to be used for new image uploads
 
+    /**
+     * Initializes the controller, table columns, listeners, and disables editing.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Setear columnas
+        // Bind table columns to RoomImages properties
         pathColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getImagePath()));
         descriptionColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getDescription()));
         roomColumn.setCellValueFactory(cell -> {
@@ -54,7 +59,7 @@ public class RoomImageManagerController implements Initializable {
             return new SimpleStringProperty(room != null ? room.getName() : "Sin sala");
         });
 
-        // Desactivar campos de edición al inicio
+        // Disable editing fields/buttons at startup (future-proof for UI flows)
         disableAllEditFields();
         editBtn.setDisable(true);
         eraseBtn.setDisable(true);
@@ -66,7 +71,7 @@ public class RoomImageManagerController implements Initializable {
         loadFilteredImages();
         showDefaultPreview();
 
-        // Selección de tabla
+        // Table selection listener for enabling edit/delete and showing preview
         imageTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 editBtn.setDisable(false);
@@ -82,16 +87,22 @@ public class RoomImageManagerController implements Initializable {
             }
         });
 
-        // Filtro por sala
+        // Room filter combo box listener
         roomFilterComboBox.valueProperty().addListener((obs, oldVal, newVal) -> applyFilter());
     }
 
+    /**
+     * Loads all available rooms into combo boxes.
+     */
     private void loadRoomsCombo() {
         roomsList = FXCollections.observableArrayList(roomsCRUD.getAllRooms());
         roomFilterComboBox.setItems(roomsList);
         editRoomComboBox.setItems(roomsList);
     }
 
+    /**
+     * Loads images from the database, sets up filtering and sorting.
+     */
     private void loadFilteredImages() {
         masterList = FXCollections.observableArrayList(imagesCRUD.getAllRoomImages());
         filteredData = new FilteredList<>(masterList, p -> true);
@@ -101,17 +112,26 @@ public class RoomImageManagerController implements Initializable {
         imageTable.setItems(sortedList);
     }
 
+    /**
+     * Applies room filter to the image list.
+     */
     private void applyFilter() {
         Rooms selectedRoom = roomFilterComboBox.getValue();
         filteredData.setPredicate(img -> selectedRoom == null ||
                 (img.getRooms() != null && img.getRooms().getId().compareTo(selectedRoom.getId()) == 0));
     }
 
+    /**
+     * Clears the room filter.
+     */
     @FXML
     private void clearFiltersBtnAction() {
         roomFilterComboBox.setValue(null);
     }
 
+    /**
+     * Populates the edit fields with the selected image's data.
+     */
     private void populateEditFields(RoomImages img) {
         editPath.setText(img.getImagePath());
         editDescription.setText(img.getDescription());
@@ -119,6 +139,9 @@ public class RoomImageManagerController implements Initializable {
         selectedImageFile = null;
     }
 
+    /**
+     * Clears all edit fields and resets selected image file.
+     */
     private void clearEditFields() {
         editPath.clear();
         editDescription.clear();
@@ -126,6 +149,9 @@ public class RoomImageManagerController implements Initializable {
         selectedImageFile = null;
     }
 
+    /**
+     * Disables all edit fields and buttons (except add/clear).
+     */
     private void disableAllEditFields() {
         editPath.setDisable(true);
         editDescription.setDisable(true);
@@ -133,13 +159,19 @@ public class RoomImageManagerController implements Initializable {
         browseBtn.setDisable(true);
     }
 
+    /**
+     * Enables all edit fields and browse button except for path (auto-filled).
+     */
     private void enableAllEditFields() {
         editDescription.setDisable(false);
         editRoomComboBox.setDisable(false);
         browseBtn.setDisable(false);
-        // editPath sigue deshabilitado (solo se autoescribe)
+        // editPath remains disabled (auto-filled only)
     }
 
+    /**
+     * Shows image preview for the selected RoomImages record.
+     */
     private void showPreview(RoomImages img) {
         if (img.getImagePath() != null) {
             Image image = RoomImageLoader.loadRoomImage(img);
@@ -149,10 +181,16 @@ public class RoomImageManagerController implements Initializable {
         }
     }
 
+    /**
+     * Shows the default (placeholder) image in the preview.
+     */
     private void showDefaultPreview() {
         previewImage.setImage(RoomImagesHelper.getPlaceholderImage());
     }
 
+    /**
+     * Handler for the "Add New" button. Prepares the form for new image entry.
+     */
     @FXML
     private void addNewBtnAction() {
         imageTable.setDisable(true);
@@ -168,6 +206,9 @@ public class RoomImageManagerController implements Initializable {
         showDefaultPreview();
     }
 
+    /**
+     * Handler for the "Edit" button. Enables fields for editing the selected image.
+     */
     @FXML
     private void editBtnAction() {
         RoomImages selected = imageTable.getSelectionModel().getSelectedItem();
@@ -182,16 +223,22 @@ public class RoomImageManagerController implements Initializable {
         saveChangesBtn.setDisable(false);
     }
 
+    /**
+     * Handler for the "Browse" button to select an image file.
+     */
     @FXML
     private void handleBrowseImage() {
         File file = RoomImagesHelper.chooseImageFile();
         if (file != null) {
             selectedImageFile = file;
-            editPath.setText(file.getAbsolutePath()); // Solo para mostrar en el campo
+            editPath.setText(file.getAbsolutePath()); // Display path only for user info
             previewImage.setImage(new Image(file.toURI().toString()));
         }
     }
 
+    /**
+     * Handler for "Save New" button. Validates and saves a new image record.
+     */
     @FXML
     private void saveNewBtnAction() {
         if (selectedImageFile == null) {
@@ -227,6 +274,9 @@ public class RoomImageManagerController implements Initializable {
         showDefaultPreview();
     }
 
+    /**
+     * Handler for "Save Changes" button. Updates the selected image record.
+     */
     @FXML
     private void saveChangesBtnAction() {
         RoomImages selected = imageTable.getSelectionModel().getSelectedItem();
@@ -237,7 +287,7 @@ public class RoomImageManagerController implements Initializable {
             return;
         }
 
-        // Si seleccionó nueva imagen, copiarla y actualizar la ruta
+        // If a new image file is selected, copy it and update the path
         if (selectedImageFile != null) {
             String copiedPath = RoomImagesHelper.copyImageToAppFolder(selectedImageFile);
             if (copiedPath == null) {
@@ -265,6 +315,9 @@ public class RoomImageManagerController implements Initializable {
         showDefaultPreview();
     }
 
+    /**
+     * Handler for "Erase" button. Deletes the selected image record.
+     */
     @FXML
     private void eraseBtnAction() {
         RoomImages selected = imageTable.getSelectionModel().getSelectedItem();
@@ -281,6 +334,9 @@ public class RoomImageManagerController implements Initializable {
         showDefaultPreview();
     }
 
+    /**
+     * Utility to show information alerts.
+     */
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);

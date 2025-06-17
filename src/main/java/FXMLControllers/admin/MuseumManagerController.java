@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package FXMLControllers.admin;
 
 import PersistenceCRUD.MuseumsCRUD;
@@ -30,49 +26,38 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- * FXML Controller class
- *
- * @author jp570
- */
 public class MuseumManagerController implements Initializable {
 
-    @FXML
-    private TableView<Museums> museumsTable;
+    // Table and column declarations for museums
+    @FXML private TableView<Museums> museumsTable;
+    @FXML private TableColumn<Museums, String> nameColumn;
+    @FXML private TableColumn<Museums, String> typeColumn;
+    @FXML private TableColumn<Museums, String> locationColumn;
+    @FXML private TableColumn<Museums, Date> foundationColumn;
+    @FXML private TableColumn<Museums, String> directorColumn;
+    @FXML private TableColumn<Museums, String> websiteColumn;
+    @FXML private TableColumn<Museums, BigDecimal> idColumn;
 
-    @FXML
-    private TableColumn<Museums, String> nameColumn;
-    @FXML
-    private TableColumn<Museums, String> typeColumn;
-    @FXML
-    private TableColumn<Museums, String> locationColumn;
-    @FXML
-    private TableColumn<Museums, Date> foundationColumn;
-    @FXML
-    private TableColumn<Museums, String> directorColumn;
-    @FXML
-    private TableColumn<Museums, String> websiteColumn;
-    @FXML
-    private TableColumn<Museums, BigDecimal> idColumn;
-
-    @FXML
-    private TextField editName, editType, editLocation, editDirector, editWebsite, filterTextField;
-    
+    // Form fields for editing/adding museums
+    @FXML private TextField editName, editType, editLocation, editDirector, editWebsite, filterTextField;
     @FXML private DatePicker editFoundation;
-
     @FXML private ComboBox<String> typeFilterComboBox;
-    
-    @FXML
-    private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
+
+    // Action buttons
+    @FXML private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
 
     private final MuseumsCRUD museumsCRUD = new MuseumsCRUD();
-    
+
+    // Observable lists for master and filtered data
     private ObservableList<Museums> masterList;
     private FilteredList<Museums> filteredData;
 
+    /**
+     * Initializes the controller and UI. Sets up table columns, listeners, and filter components.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        // Bind table columns to Museums properties
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("museumType"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
@@ -81,6 +66,7 @@ public class MuseumManagerController implements Initializable {
         websiteColumn.setCellValueFactory(new PropertyValueFactory<>("website"));
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
+        // Initial UI state: disable edit fields/buttons (future-proof for new requirements)
         disableAllEditFields();
         editBtn.setDisable(true);
         eraseBtn.setDisable(true);
@@ -90,24 +76,22 @@ public class MuseumManagerController implements Initializable {
 
         loadFilteredMuseums();
 
+        // Table selection listener: enables edit/delete when a row is selected
         museumsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
-
                 editBtn.setDisable(false);
                 eraseBtn.setDisable(false);
-
                 populateEditFields(newVal);
                 disableAllEditFields();
             } else {
-
                 editBtn.setDisable(true);
                 eraseBtn.setDisable(true);
             }
         });
-        
+
+        // Custom cell factory for date formatting in the foundation column
         foundationColumn.setCellFactory(column -> new TableCell<Museums, Date>() {
             private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
             @Override
             protected void updateItem(Date item, boolean empty) {
                 super.updateItem(item, empty);
@@ -121,20 +105,28 @@ public class MuseumManagerController implements Initializable {
         });
     }
 
+    /**
+     * Loads all museums into the table. Used for unfiltered reloads.
+     */
     private void loadMuseums() {
         List<Museums> museums = museumsCRUD.getAllMuseums();
         ObservableList<Museums> obs = FXCollections.observableArrayList(museums);
         museumsTable.setItems(obs);
     }
-    
+
+    /**
+     * Loads museums and sets up filter and sort logic for the table.
+     */
     private void loadFilteredMuseums() {
         masterList = FXCollections.observableArrayList(museumsCRUD.getAllMuseums());
         filteredData = new FilteredList<>(masterList, p -> true);
 
+        // Listener for text filter
         filterTextField.textProperty().addListener((obs, oldVal, newVal) -> {
             applyFilter();
         });
 
+        // Predefined museum types for filter (future-proof: centralize in DB/config if needed)
         typeFilterComboBox.setItems(FXCollections.observableArrayList("Arte", "Historia", "Musical", "Militar"));
         typeFilterComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
             applyFilter();
@@ -145,6 +137,9 @@ public class MuseumManagerController implements Initializable {
         museumsTable.setItems(sortedList);
     }
 
+    /**
+     * Applies text and type filters to the museums list.
+     */
     private void applyFilter() {
         String text = filterTextField.getText() == null ? "" : filterTextField.getText().toLowerCase();
         String type = typeFilterComboBox.getValue();
@@ -156,13 +151,19 @@ public class MuseumManagerController implements Initializable {
             return matchesText && matchesType;
         });
     }
-    
+
+    /**
+     * Clears all filters.
+     */
     @FXML
     private void clearFiltersBtnAction() {
         filterTextField.clear();
         typeFilterComboBox.setValue(null);
     }
 
+    /**
+     * Populates the edit form fields with data from a selected museum.
+     */
     private void populateEditFields(Museums m) {
         editName.setText(m.getName());
         editType.setText(m.getMuseumType());
@@ -172,6 +173,9 @@ public class MuseumManagerController implements Initializable {
         editWebsite.setText(m.getWebsite());
     }
 
+    /**
+     * Clears all edit form fields.
+     */
     private void clearEditFields() {
         editName.clear();
         editType.clear();
@@ -181,6 +185,9 @@ public class MuseumManagerController implements Initializable {
         editWebsite.clear();
     }
 
+    /**
+     * Disables all edit fields.
+     */
     private void disableAllEditFields() {
         editName.setDisable(true);
         editType.setDisable(true);
@@ -190,6 +197,9 @@ public class MuseumManagerController implements Initializable {
         editWebsite.setDisable(true);
     }
 
+    /**
+     * Enables all edit fields.
+     */
     private void enableAllEditFields() {
         editName.setDisable(false);
         editType.setDisable(false);
@@ -199,6 +209,9 @@ public class MuseumManagerController implements Initializable {
         editWebsite.setDisable(false);
     }
 
+    /**
+     * Handler for the "Add New" button. Prepares the form for adding a new museum.
+     */
     @FXML
     private void addNewBtnAction() {
         museumsTable.setDisable(true);
@@ -213,20 +226,24 @@ public class MuseumManagerController implements Initializable {
         saveChangesBtn.setDisable(true);
     }
 
+    /**
+     * Handler for "Save New" button. Validates and saves a new museum.
+     * Shows alert if data is invalid.
+     */
     @FXML
     private void saveNewBtnAction() {
         if (editName.getText().trim().isEmpty()) {
             showAlert("El nombre es obligatorio.");
             return;
         }
-        
-        if ((!editType.getText().equalsIgnoreCase("Arte")) && (!editType.getText().equalsIgnoreCase("Historia")) && (!editType.getText().equalsIgnoreCase("Musical")) && (!editType.getText().equalsIgnoreCase("Militar"))){
+        // Only allow permitted types
+        if ((!editType.getText().equalsIgnoreCase("Arte")) && (!editType.getText().equalsIgnoreCase("Historia")) && (!editType.getText().equalsIgnoreCase("Musical")) && (!editType.getText().equalsIgnoreCase("Militar"))) {
             showAlert("El tipo de museo no es de los tipos permitidos (Arte, Historia, Musical, Militar)");
             return;
         }
 
         LocalDate changedDate = editFoundation.getValue();
-        
+
         Museums m = new Museums();
         m.setName(editName.getText().trim());
         m.setMuseumType(editType.getText().trim());
@@ -247,6 +264,9 @@ public class MuseumManagerController implements Initializable {
         museumsTable.setDisable(false);
     }
 
+    /**
+     * Handler for "Edit" button. Enables fields for editing the selected museum.
+     */
     @FXML
     private void editBtnAction() {
         Museums selected = museumsTable.getSelectionModel().getSelectedItem();
@@ -261,9 +281,12 @@ public class MuseumManagerController implements Initializable {
 
         enableAllEditFields();
         saveChangesBtn.setDisable(false);
-
     }
 
+    /**
+     * Handler for "Save Changes" button. Updates the selected museum with new data.
+     * Validates input and shows alert if data is invalid.
+     */
     @FXML
     private void saveChangesBtnAction() {
         Museums selected = museumsTable.getSelectionModel().getSelectedItem();
@@ -275,14 +298,14 @@ public class MuseumManagerController implements Initializable {
             showAlert("El nombre es obligatorio.");
             return;
         }
-        
-        if ((!editType.getText().equalsIgnoreCase("Arte")) || (!editType.getText().equalsIgnoreCase("Historia")) || (!editType.getText().equalsIgnoreCase("Musical")) || (!editType.getText().equalsIgnoreCase("Militar"))){
+        // Only allow permitted types (future-proof: consider using an enum or config)
+        if ((!editType.getText().equalsIgnoreCase("Arte")) && (!editType.getText().equalsIgnoreCase("Historia")) && (!editType.getText().equalsIgnoreCase("Musical")) && (!editType.getText().equalsIgnoreCase("Militar"))) {
             showAlert("El tipo de museo no es de los tipos permitidos (Arte, Historia, Musical, Militar)");
             return;
-        }        
+        }
 
         LocalDate changedDate = editFoundation.getValue();
-        
+
         selected.setName(editName.getText().trim());
         selected.setMuseumType(editType.getText().trim());
         selected.setLocation(editLocation.getText().trim());
@@ -304,6 +327,9 @@ public class MuseumManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Handler for "Erase" button. Deletes the selected museum after confirmation.
+     */
     @FXML
     private void eraseBtnAction() {
         Museums selected = museumsTable.getSelectionModel().getSelectedItem();
@@ -321,6 +347,9 @@ public class MuseumManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Utility: Shows an information alert with the given message.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

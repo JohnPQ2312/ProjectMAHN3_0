@@ -18,8 +18,8 @@
         <Label layoutX="363.0" layoutY="70.0" text="a" />
         <DatePicker fx:id="endDatePicker" layoutX="380.0" layoutY="66.0" />
 
-        <Button fx:id="generateButton" layoutX="600.0" layoutY="66.0" text="GENERAR REPORTE" />
-        <Button fx:id="exportPdfButton" disable="true" layoutX="780.0" layoutY="66.0" text="EXPORTAR A PDF" />
+        <Button fx:id="generateButton" layoutX="600.0" layoutY="66.0" onAction="#generateReport" text="GENERAR REPORTE" />
+        <Button fx:id="exportPdfButton" disable="true" layoutX="780.0" layoutY="66.0" onAction="#exportToPDF" text="EXPORTAR A PDF" />
 
         <TableView fx:id="commissionsTable" layoutX="60.0" layoutY="154.0" prefHeight="386.0" prefWidth="880.0">
             <columns>
@@ -31,7 +31,7 @@
         </TableView>
       <Label layoutX="60.0" layoutY="114.0" text="Filtro por método:" />
       <ComboBox fx:id="filterPaymentMethodCombo" layoutX="170.0" layoutY="110.0" prefWidth="150.0" />
-      <Label layoutX="78.0" layoutY="562.0" text="Total de comisión:" />
-      <TextField fx:id="commissionPerTypeTotal" layoutX="180.0" layoutY="558.0" />
+      <Label layoutX="78.0" layoutY="562.0" text="Total del método:" />
+      <TextField fx:id="commissionPerTypeTotal" editable="false" layoutX="180.0" layoutY="558.0" />
     </children>
 </AnchorPane>

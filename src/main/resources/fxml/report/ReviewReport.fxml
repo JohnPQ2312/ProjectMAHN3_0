@@ -17,8 +17,8 @@
         <Label layoutX="375.0" layoutY="70.0" text="Ordenar por:" />
         <ComboBox fx:id="orderComboBox" layoutX="465.0" layoutY="66.0" prefWidth="200.0" />
 
-        <Button fx:id="generateButton" layoutX="708.0" layoutY="66.0" text="GENERAR REPORTE" />
-        <Button fx:id="exportPdfButton" disable="true" layoutX="858.0" layoutY="66.0" text="EXPORTAR A PDF" />
+        <Button fx:id="generateButton" layoutX="708.0" layoutY="66.0" onAction="#generateReport" text="GENERAR REPORTE" />
+        <Button fx:id="exportPdfButton" disable="true" layoutX="858.0" layoutY="66.0" onAction="#exportToPDF" text="EXPORTAR A PDF" />
 
         <TableView fx:id="roomRatingsTable" layoutX="60.0" layoutY="150.0" prefHeight="470.0" prefWidth="880.0">
             <columns>
@@ -28,6 +28,6 @@
                 <TableColumn fx:id="reviewCountColumn" prefWidth="150.0" text="Cantidad de Reseñas" />
             </columns>
         </TableView>
-      <Button fx:id="cleanFilterBtn" layoutX="60.0" layoutY="106.0" mnemonicParsing="false" text="LIMPIAR FILTROS" />
+      <Button fx:id="cleanFilterBtn" layoutX="60.0" layoutY="106.0" mnemonicParsing="false" onAction="#resetFilters" text="LIMPIAR FILTROS" />
     </children>
 </AnchorPane>

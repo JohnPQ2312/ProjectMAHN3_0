@@ -21,11 +21,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controller for price management. Handles CRUD operations, filtering, 
+ * and UI logic for price records associated with museum rooms.
+ */
 public class PriceManagerController implements Initializable {
 
     @FXML
     private TableView<Prices> priceTable;
-
     @FXML
     private TableColumn<Prices, BigDecimal> idColumn;
     @FXML
@@ -50,6 +53,10 @@ public class PriceManagerController implements Initializable {
     private FilteredList<Prices> filteredData;
     private ObservableList<Rooms> roomsList;
 
+    /**
+     * Initializes the controller, sets up table columns, listeners, 
+     * and disables editing until a selection is made.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -70,6 +77,7 @@ public class PriceManagerController implements Initializable {
         loadRoomsCombo();
         loadFilteredPrices();
 
+        // Listener to enable edit/delete when a row is selected
         priceTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 editBtn.setDisable(false);
@@ -83,12 +91,18 @@ public class PriceManagerController implements Initializable {
         });
     }
 
+    /**
+     * Loads all available rooms into the combo boxes for filtering and editing.
+     */
     private void loadRoomsCombo() {
         roomsList = FXCollections.observableArrayList(roomsCRUD.getAllRooms());
         roomFilterComboBox.setItems(roomsList);
         editRoomComboBox.setItems(roomsList);
     }
 
+    /**
+     * Loads all prices, sets up filtering by price and room, and sorting.
+     */
     private void loadFilteredPrices() {
         masterList = FXCollections.observableArrayList(pricesCRUD.getAllPrices());
         filteredData = new FilteredList<>(masterList, p -> true);
@@ -101,6 +115,9 @@ public class PriceManagerController implements Initializable {
         priceTable.setItems(sortedList);
     }
 
+    /**
+     * Applies filters to the price list based on user input and selected room.
+     */
     private void applyFilter() {
         String text = filterTextField.getText() == null ? "" : filterTextField.getText().toLowerCase();
         Rooms selectedRoom = roomFilterComboBox.getValue();
@@ -114,36 +131,54 @@ public class PriceManagerController implements Initializable {
         });
     }
 
+    /**
+     * Clears all filters (text and room).
+     */
     @FXML
     private void clearFiltersBtnAction() {
         filterTextField.clear();
         roomFilterComboBox.setValue(null);
     }
 
+    /**
+     * Populates the edit fields with the selected price's data.
+     */
     private void populateEditFields(Prices p) {
         editNormalPrice.setText(p.getNormalPrice() != null ? p.getNormalPrice().toString() : "");
         editSundayPrice.setText(p.getSundayPrice() != null ? p.getSundayPrice().toString() : "");
         editRoomComboBox.setValue(p.getRooms());
     }
 
+    /**
+     * Clears all edit fields.
+     */
     private void clearEditFields() {
         editNormalPrice.clear();
         editSundayPrice.clear();
         editRoomComboBox.setValue(null);
     }
 
+    /**
+     * Disables all edit fields.
+     */
     private void disableAllEditFields() {
         editNormalPrice.setDisable(true);
         editSundayPrice.setDisable(true);
         editRoomComboBox.setDisable(true);
     }
 
+    /**
+     * Enables all edit fields.
+     */
     private void enableAllEditFields() {
         editNormalPrice.setDisable(false);
         editSundayPrice.setDisable(false);
         editRoomComboBox.setDisable(false);
     }
 
+    /**
+     * Handler for the "Add New" button. Prepares the form for new price entry.
+     */
     @FXML
     private void addNewBtnAction() {
         priceTable.setDisable(true);
@@ -158,6 +193,9 @@ public class PriceManagerController implements Initializable {
         saveChangesBtn.setDisable(true);
     }
 
+    /**
+     * Handler for "Save New" button. Validates and saves a new price.
+     */
     @FXML
     private void saveNewBtnAction() {
         if (editNormalPrice.getText().trim().isEmpty()) {
@@ -191,6 +229,9 @@ public class PriceManagerController implements Initializable {
         priceTable.setDisable(false);
     }
 
+    /**
+     * Handler for "Edit" button. Enables fields for editing the selected price.
+     */
     @FXML
     private void editBtnAction() {
         Prices selected = priceTable.getSelectionModel().getSelectedItem();
@@ -205,6 +246,9 @@ public class PriceManagerController implements Initializable {
         saveChangesBtn.setDisable(false);
     }
 
+    /**
+     * Handler for "Save Changes" button. Updates the selected price with new data.
+     */
     @FXML
     private void saveChangesBtnAction() {
         Prices selected = priceTable.getSelectionModel().getSelectedItem();
@@ -242,6 +286,9 @@ public class PriceManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Handler for "Erase" button. Deletes the selected price record.
+     */
     @FXML
     private void eraseBtnAction() {
         Prices selected = priceTable.getSelectionModel().getSelectedItem();
@@ -257,6 +304,9 @@ public class PriceManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Utility to show information alerts.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

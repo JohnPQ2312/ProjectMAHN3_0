@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package FXMLControllers.auxclasses;
 
 import com.google.zxing.*;
@@ -17,8 +13,13 @@ import java.nio.file.Path;
 
 public class QRUtils {
 
-    
-    //Genera un QR en un archivo de imagen (PNG).
+    /**
+     * Generates a QR code and saves it as a PNG image file.
+     *
+     * @param content  The text to encode in the QR code
+     * @param filePath The output file path (PNG)
+     * @param size     The width and height in pixels
+     */
     public static void generateQrToFile(String content, String filePath, int size) throws Exception {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, size, size);
@@ -26,16 +27,25 @@ public class QRUtils {
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
     }
 
-    
-    //Genera un QR y lo devuelve como BufferedImage (para usar en memoria).
+    /**
+     * Generates a QR code and returns it as a BufferedImage (for in-memory use).
+     *
+     * @param content The text to encode
+     * @param size    The image size (pixels)
+     * @return BufferedImage with the QR code
+     */
     public static BufferedImage generateQrBufferedImage(String content, int size) throws Exception {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, size, size);
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
-    
-    //Lee el texto de un QR desde un archivo PDF.
+    /**
+     * Reads a QR code from the first page of a PDF file and returns the decoded text.
+     *
+     * @param file The PDF file to read from
+     * @return The decoded text, or throws exception if not found
+     */
     public static String decodeQrFromFile(File file) throws Exception {
         try (PDDocument document = PDDocument.load(file)) {
             PDFRenderer pdfRenderer = new PDFRenderer(document);

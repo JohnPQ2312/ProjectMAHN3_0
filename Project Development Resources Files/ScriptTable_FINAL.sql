@@ -1,5 +1,5 @@
 ﻿prompt PL/SQL Developer Export Tables for user JPEREZ@LOCALHOST:1521/XE
-prompt Created by jp570 on lunes, 2 de junio de 2025
+prompt Created by jp570 on martes, 17 de junio de 2025
 set feedback off
 set define off
 
@@ -42,31 +42,17 @@ create table MUSEUMS
   director    VARCHAR2(100),
   website     VARCHAR2(200)
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  maxtrans 255;
 alter table MUSEUMS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  maxtrans 255;
 
 prompt Creating ROOMS...
 create table ROOMS
@@ -76,31 +62,17 @@ create table ROOMS
   description VARCHAR2(200),
   museum_id   NUMBER not null
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  maxtrans 255;
 alter table ROOMS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
-  maxtrans 255
-  storage
-  (
-    initial 64K
-    next 1M
-    minextents 1
-    maxextents unlimited
-  );
+  maxtrans 255;
 alter table ROOMS
   add foreign key (MUSEUM_ID)
   references MUSEUMS (ID);
@@ -114,14 +86,14 @@ create table COLLECTIONS
   century     VARCHAR2(20) not null,
   room_id     NUMBER not null
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table COLLECTIONS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -136,21 +108,21 @@ create table PAYMENT_METHODS
   type                  VARCHAR2(50) not null,
   commission_percentage NUMBER(5,2) not null
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table PAYMENT_METHODS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
 alter table PAYMENT_METHODS
   add unique (TYPE)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -168,24 +140,45 @@ create table USERS
   phone             VARCHAR2(20),
   registration_date DATE default SYSDATE
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
-  maxtrans 255;
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
 alter table USERS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
-  maxtrans 255;
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
 alter table USERS
   add unique (EMAIL)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
-  maxtrans 255;
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
 
 prompt Creating PURCHASES...
 create table PURCHASES
@@ -197,14 +190,14 @@ create table PURCHASES
   total_commission  NUMBER(7,2) not null,
   purchase_date     DATE default SYSDATE
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table PURCHASES
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -228,14 +221,14 @@ create table COMMISSIONS
   amount            NUMBER(7,2) not null,
   commission_date   DATE default SYSDATE
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table COMMISSIONS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -259,21 +252,21 @@ create table ENTRIES
   qr_code     VARCHAR2(255) not null,
   status      VARCHAR2(20) default 'ACTIVE'
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table ENTRIES
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
 alter table ENTRIES
   add unique (QR_CODE)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -294,14 +287,14 @@ create table PRICES
   sunday_price NUMBER(7,2) not null,
   room_id      NUMBER not null
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table PRICES
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -323,14 +316,14 @@ create table REVIEWS
   user_comment VARCHAR2(300),
   review_date  DATE default SYSDATE
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table REVIEWS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -351,14 +344,14 @@ create table ROOM_IMAGES
   image_path  VARCHAR2(200) not null,
   description VARCHAR2(200)
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table ROOM_IMAGES
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -378,14 +371,14 @@ create table SPECIES
   features        VARCHAR2(500),
   collection_id   NUMBER not null
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table SPECIES
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -404,14 +397,14 @@ create table THEMES
   period   VARCHAR2(20),
   room_id  NUMBER not null
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table THEMES
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -428,14 +421,14 @@ create table TRANSFERS
   to_user_id    NUMBER not null,
   transfer_date DATE default SYSDATE
 )
-tablespace USERS
+tablespace MAHN_DATA
   pctfree 10
   initrans 1
   maxtrans 255;
 alter table TRANSFERS
   add primary key (ID)
   using index
-  tablespace USERS
+  tablespace MAHN_DATA
   pctfree 10
   initrans 2
   maxtrans 255;
@@ -478,47 +471,48 @@ alter table THEMES disable all triggers;
 prompt Disabling triggers for TRANSFERS...
 alter table TRANSFERS disable all triggers;
 prompt Disabling foreign key constraints for ROOMS...
-alter table ROOMS disable constraint SYS_C008416;
+alter table ROOMS disable constraint SYS_C008598;
 prompt Disabling foreign key constraints for COLLECTIONS...
-alter table COLLECTIONS disable constraint SYS_C008422;
+alter table COLLECTIONS disable constraint SYS_C008604;
 prompt Disabling foreign key constraints for PURCHASES...
-alter table PURCHASES disable constraint SYS_C008455;
-alter table PURCHASES disable constraint SYS_C008456;
+alter table PURCHASES disable constraint SYS_C008637;
+alter table PURCHASES disable constraint SYS_C008638;
 prompt Disabling foreign key constraints for COMMISSIONS...
-alter table COMMISSIONS disable constraint SYS_C008463;
-alter table COMMISSIONS disable constraint SYS_C008464;
+alter table COMMISSIONS disable constraint SYS_C008645;
+alter table COMMISSIONS disable constraint SYS_C008646;
 prompt Disabling foreign key constraints for ENTRIES...
-alter table ENTRIES disable constraint SYS_C008474;
-alter table ENTRIES disable constraint SYS_C008475;
+alter table ENTRIES disable constraint SYS_C008656;
+alter table ENTRIES disable constraint SYS_C008657;
 prompt Disabling foreign key constraints for PRICES...
-alter table PRICES disable constraint SYS_C008440;
+alter table PRICES disable constraint SYS_C008622;
 prompt Disabling foreign key constraints for REVIEWS...
-alter table REVIEWS disable constraint SYS_C008494;
-alter table REVIEWS disable constraint SYS_C008495;
+alter table REVIEWS disable constraint SYS_C008671;
+alter table REVIEWS disable constraint SYS_C008672;
 prompt Disabling foreign key constraints for ROOM_IMAGES...
-alter table ROOM_IMAGES disable constraint SYS_C008488;
+alter table ROOM_IMAGES disable constraint SYS_C008677;
 prompt Disabling foreign key constraints for SPECIES...
-alter table SPECIES disable constraint SYS_C008427;
+alter table SPECIES disable constraint SYS_C008609;
 prompt Disabling foreign key constraints for THEMES...
-alter table THEMES disable constraint SYS_C008432;
+alter table THEMES disable constraint SYS_C008614;
 prompt Disabling foreign key constraints for TRANSFERS...
-alter table TRANSFERS disable constraint SYS_C008481;
-alter table TRANSFERS disable constraint SYS_C008482;
-alter table TRANSFERS disable constraint SYS_C008483;
+alter table TRANSFERS disable constraint SYS_C008663;
+alter table TRANSFERS disable constraint SYS_C008664;
+alter table TRANSFERS disable constraint SYS_C008665;
 prompt Loading MUSEUMS...
-insert into MUSEUMS (id, name, museum_type, location, foundation, director, website)
-values (1, 'Museo Nacional de Costa Rica', 'Historia', 'San José, Costa Rica', to_date('15-06-1887 23:36:13', 'dd-mm-yyyy hh24:mi:ss'), 'María López Ramírez', 'https://www.museocostarica.go.cr');
-prompt 1 records loaded
+prompt Table is empty
 prompt Loading ROOMS...
-insert into ROOMS (id, name, description, museum_id)
-values (1, 'Juegos', 'salon de juegos', 1);
-prompt 1 records loaded
+prompt Table is empty
 prompt Loading COLLECTIONS...
 prompt Table is empty
 prompt Loading PAYMENT_METHODS...
 prompt Table is empty
 prompt Loading USERS...
-prompt Table is empty
+insert into USERS (id, name, email, password, role, phone, registration_date)
+values (1001, 'Ana Rodríguez', 'ana.rodriguez@example.com', 'prueba123', 'client', '8888-9999', to_date('16-06-2025 19:24:08', 'dd-mm-yyyy hh24:mi:ss'));
+insert into USERS (id, name, email, password, role, phone, registration_date)
+values (2, 'John', 'jp57084@gmail.com', '1234', 'admin', '12345678', to_date('16-06-2025 02:43:20', 'dd-mm-yyyy hh24:mi:ss'));
+commit;
+prompt 2 records loaded
 prompt Loading PURCHASES...
 prompt Table is empty
 prompt Loading COMMISSIONS...
@@ -538,33 +532,33 @@ prompt Table is empty
 prompt Loading TRANSFERS...
 prompt Table is empty
 prompt Enabling foreign key constraints for ROOMS...
-alter table ROOMS enable constraint SYS_C008416;
+alter table ROOMS enable constraint SYS_C008598;
 prompt Enabling foreign key constraints for COLLECTIONS...
-alter table COLLECTIONS enable constraint SYS_C008422;
+alter table COLLECTIONS enable constraint SYS_C008604;
 prompt Enabling foreign key constraints for PURCHASES...
-alter table PURCHASES enable constraint SYS_C008455;
-alter table PURCHASES enable constraint SYS_C008456;
+alter table PURCHASES enable constraint SYS_C008637;
+alter table PURCHASES enable constraint SYS_C008638;
 prompt Enabling foreign key constraints for COMMISSIONS...
-alter table COMMISSIONS enable constraint SYS_C008463;
-alter table COMMISSIONS enable constraint SYS_C008464;
+alter table COMMISSIONS enable constraint SYS_C008645;
+alter table COMMISSIONS enable constraint SYS_C008646;
 prompt Enabling foreign key constraints for ENTRIES...
-alter table ENTRIES enable constraint SYS_C008474;
-alter table ENTRIES enable constraint SYS_C008475;
+alter table ENTRIES enable constraint SYS_C008656;
+alter table ENTRIES enable constraint SYS_C008657;
 prompt Enabling foreign key constraints for PRICES...
-alter table PRICES enable constraint SYS_C008440;
+alter table PRICES enable constraint SYS_C008622;
 prompt Enabling foreign key constraints for REVIEWS...
-alter table REVIEWS enable constraint SYS_C008494;
-alter table REVIEWS enable constraint SYS_C008495;
+alter table REVIEWS enable constraint SYS_C008671;
+alter table REVIEWS enable constraint SYS_C008672;
 prompt Enabling foreign key constraints for ROOM_IMAGES...
-alter table ROOM_IMAGES enable constraint SYS_C008488;
+alter table ROOM_IMAGES enable constraint SYS_C008677;
 prompt Enabling foreign key constraints for SPECIES...
-alter table SPECIES enable constraint SYS_C008427;
+alter table SPECIES enable constraint SYS_C008609;
 prompt Enabling foreign key constraints for THEMES...
-alter table THEMES enable constraint SYS_C008432;
+alter table THEMES enable constraint SYS_C008614;
 prompt Enabling foreign key constraints for TRANSFERS...
-alter table TRANSFERS enable constraint SYS_C008481;
-alter table TRANSFERS enable constraint SYS_C008482;
-alter table TRANSFERS enable constraint SYS_C008483;
+alter table TRANSFERS enable constraint SYS_C008663;
+alter table TRANSFERS enable constraint SYS_C008664;
+alter table TRANSFERS enable constraint SYS_C008665;
 prompt Enabling triggers for MUSEUMS...
 alter table MUSEUMS enable all triggers;
 prompt Enabling triggers for ROOMS...

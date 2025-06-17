@@ -21,29 +21,22 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controller for managing themes (temáticas) in the admin interface.
+ * Handles CRUD, filtering, and table logic for theme records.
+ */
 public class ThemeManagerController implements Initializable {
 
-    @FXML
-    private TableView<Themes> themesTable;
+    @FXML private TableView<Themes> themesTable;
+    @FXML private TableColumn<Themes, String> nameColumn;
+    @FXML private TableColumn<Themes, String> featuresColumn;
+    @FXML private TableColumn<Themes, String> periodColumn;
+    @FXML private TableColumn<Themes, String> roomColumn;
+    @FXML private TableColumn<Themes, BigDecimal> idColumn;
 
-    @FXML
-    private TableColumn<Themes, String> nameColumn;
-    @FXML
-    private TableColumn<Themes, String> featuresColumn;
-    @FXML
-    private TableColumn<Themes, String> periodColumn;
-    @FXML
-    private TableColumn<Themes, String> roomColumn;
-    @FXML
-    private TableColumn<Themes, BigDecimal> idColumn;
-
-    @FXML
-    private TextField editName, editFeatures, editPeriod, filterTextField;
-    @FXML
-    private ComboBox<Rooms> editRoom, roomFilterComboBox;
-
-    @FXML
-    private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
+    @FXML private TextField editName, editFeatures, editPeriod, filterTextField;
+    @FXML private ComboBox<Rooms> editRoom, roomFilterComboBox;
+    @FXML private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
 
     private final ThemesCRUD themesCRUD = new ThemesCRUD();
     private final PersistenceCRUD.RoomsCRUD roomsCRUD = new PersistenceCRUD.RoomsCRUD();
@@ -52,6 +45,9 @@ public class ThemeManagerController implements Initializable {
     private FilteredList<Themes> filteredData;
     private ObservableList<Rooms> roomsList;
 
+    /**
+     * Initializes the controller, sets up table columns, listeners, and disables editing until a selection is made.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         nameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
@@ -73,6 +69,7 @@ public class ThemeManagerController implements Initializable {
         loadRoomsCombo();
         loadFilteredThemes();
 
+        // Table selection listener for enabling edit/delete and populating edit fields
         themesTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 editBtn.setDisable(false);
@@ -86,12 +83,18 @@ public class ThemeManagerController implements Initializable {
         });
     }
 
+    /**
+     * Loads available rooms into the combo boxes for filtering and editing.
+     */
     private void loadRoomsCombo() {
         roomsList = FXCollections.observableArrayList(roomsCRUD.getAllRooms());
         roomFilterComboBox.setItems(roomsList);
         editRoom.setItems(roomsList);
     }
 
+    /**
+     * Loads all themes, sets up filtering by text and room, and sorting.
+     */
     private void loadFilteredThemes() {
         masterList = FXCollections.observableArrayList(themesCRUD.getAllThemes());
         filteredData = new FilteredList<>(masterList, p -> true);
@@ -104,6 +107,9 @@ public class ThemeManagerController implements Initializable {
         themesTable.setItems(sortedList);
     }
 
+    /**
+     * Applies filters to the themes list based on text and selected room.
+     */
     private void applyFilter() {
         String text = filterTextField.getText() == null ? "" : filterTextField.getText().toLowerCase();
         Rooms selectedRoom = roomFilterComboBox.getValue();
@@ -117,12 +123,18 @@ public class ThemeManagerController implements Initializable {
         });
     }
 
+    /**
+     * Clears all filters (text and room).
+     */
     @FXML
     private void clearFiltersBtnAction() {
         filterTextField.clear();
         roomFilterComboBox.setValue(null);
     }
 
+    /**
+     * Populates the edit fields with the selected theme's data.
+     */
     private void populateEditFields(Themes t) {
         editName.setText(t.getName());
         editFeatures.setText(t.getFeatures());
@@ -130,6 +142,9 @@ public class ThemeManagerController implements Initializable {
         editRoom.setValue(t.getRooms());
     }
 
+    /**
+     * Clears all edit fields.
+     */
     private void clearEditFields() {
         editName.clear();
         editFeatures.clear();
@@ -137,6 +152,9 @@ public class ThemeManagerController implements Initializable {
         editRoom.setValue(null);
     }
 
+    /**
+     * Disables all edit fields.
+     */
     private void disableAllEditFields() {
         editName.setDisable(true);
         editFeatures.setDisable(true);
@@ -144,6 +162,9 @@ public class ThemeManagerController implements Initializable {
         editRoom.setDisable(true);
     }
 
+    /**
+     * Enables all edit fields.
+     */
     private void enableAllEditFields() {
         editName.setDisable(false);
         editFeatures.setDisable(false);
@@ -151,6 +172,9 @@ public class ThemeManagerController implements Initializable {
         editRoom.setDisable(false);
     }
 
+    /**
+     * Handler for the "Add New" button. Prepares the form for new theme entry.
+     */
     @FXML
     private void addNewBtnAction() {
         themesTable.setDisable(true);
@@ -165,6 +189,9 @@ public class ThemeManagerController implements Initializable {
         saveChangesBtn.setDisable(true);
     }
 
+    /**
+     * Handler for "Save New" button. Validates and saves a new theme.
+     */
     @FXML
     private void saveNewBtnAction() {
         if (editName.getText().trim().isEmpty()) {
@@ -194,6 +221,9 @@ public class ThemeManagerController implements Initializable {
         themesTable.setDisable(false);
     }
 
+    /**
+     * Handler for the "Edit" button. Enables fields for editing the selected theme.
+     */
     @FXML
     private void editBtnAction() {
         Themes selected = themesTable.getSelectionModel().getSelectedItem();
@@ -208,6 +238,9 @@ public class ThemeManagerController implements Initializable {
         saveChangesBtn.setDisable(false);
     }
 
+    /**
+     * Handler for "Save Changes" button. Updates the selected theme with new data.
+     */
     @FXML
     private void saveChangesBtnAction() {
         Themes selected = themesTable.getSelectionModel().getSelectedItem();
@@ -241,6 +274,9 @@ public class ThemeManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Handler for "Erase" button. Deletes the selected theme.
+     */
     @FXML
     private void eraseBtnAction() {
         Themes selected = themesTable.getSelectionModel().getSelectedItem();
@@ -256,6 +292,9 @@ public class ThemeManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Utility to show information alerts.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

@@ -6,6 +6,10 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+/**
+ * Controller for handling user registration.
+ * Validates input, checks for duplicate email, and creates a new user account.
+ */
 public class RegisterController {
 
     @FXML private TextField nameField;
@@ -17,6 +21,11 @@ public class RegisterController {
 
     private final UsersCRUD usersCRUD = new UsersCRUD();
 
+    /**
+     * Handles the registration logic when the user submits the registration form.
+     * Validates all fields, checks for email uniqueness, and creates the user.
+     * Shows errors or success messages in the error label.
+     */
     @FXML
     private void handleRegister() {
         String username = nameField.getText().trim();
@@ -26,20 +35,19 @@ public class RegisterController {
         String confirmPassword = confirmPasswordField.getText();
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            showError("Completa todos los campos.");
+            showError("Please complete all fields.");
             return;
         }
         if (!password.equals(confirmPassword)) {
-            showError("Las contraseñas no coinciden.");
+            showError("Passwords do not match.");
             return;
         }
         if (usersCRUD.getUserByEmail(email) != null) {
-            showError("El correo ya está registrado.");
+            showError("Email is already registered.");
             return;
         }
-        
         if (!phone.matches("\\d{8,15}")) {
-            showError("El teléfono debe tener entre 8 y 15 dígitos.");
+            showError("Phone must have between 8 and 15 digits.");
             return;
         }
 
@@ -53,19 +61,26 @@ public class RegisterController {
 
         usersCRUD.addUser(user);
 
-        showError("Registro exitoso. Ahora puedes iniciar sesión.");
+        showError("Registration successful. You can now log in.");
     }
-    
+
+    /**
+     * Navigates back to the login screen.
+     */
     @FXML
     private void backToLogin() {
         try {
             program2.projectmahn3_0.App.setRoot("login/Login");
         } catch (IOException e) {
-            showError("No se pudo cargar el registro.");
+            showError("Could not load the login screen.");
             e.printStackTrace();
         }
     }
 
+    /**
+     * Displays an error or information message in the error label.
+     * @param msg The message to display
+     */
     private void showError(String msg) {
         errorLabel.setText(msg);
         errorLabel.setVisible(true);

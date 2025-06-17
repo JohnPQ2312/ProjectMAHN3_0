@@ -22,8 +22,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controller for managing collections (colecciones) in the admin interface.
+ * Allows add, edit, delete, and filter operations on collections.
+ */
 public class CollectionManagerController implements Initializable {
 
+    // Table and columns
     @FXML
     private TableView<Collections> collectionsTable;
 
@@ -38,11 +43,13 @@ public class CollectionManagerController implements Initializable {
     @FXML
     private TableColumn<Collections, BigDecimal> idColumn;
 
+    // Edit and filter fields
     @FXML
     private TextField editName, editDescription, editCentury, filterTextField;
     @FXML
     private ComboBox<Rooms> editRoom, roomFilterComboBox;
 
+    // Action buttons
     @FXML
     private Button editBtn, eraseBtn, saveChangesBtn, saveNewBtn, addNewBtn, clearFiltersBtn;
 
@@ -53,8 +60,12 @@ public class CollectionManagerController implements Initializable {
     private FilteredList<Collections> filteredData;
     private ObservableList<Rooms> roomsList;
 
+    /**
+     * Initializes the controller and sets up the UI bindings and listeners.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Set up column cell factories
         nameColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getName()));
         descriptionColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getDescription()));
         centuryColumn.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCentury()));
@@ -64,6 +75,7 @@ public class CollectionManagerController implements Initializable {
         });
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
+        // Initial UI state
         disableAllEditFields();
         editBtn.setDisable(true);
         eraseBtn.setDisable(true);
@@ -74,6 +86,7 @@ public class CollectionManagerController implements Initializable {
         loadRoomsCombo();
         loadFilteredCollections();
 
+        // Table selection listener for enabling edit/delete
         collectionsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 editBtn.setDisable(false);
@@ -87,16 +100,23 @@ public class CollectionManagerController implements Initializable {
         });
     }
 
+    /**
+     * Loads available rooms into the combo boxes.
+     */
     private void loadRoomsCombo() {
         roomsList = FXCollections.observableArrayList(roomsCRUD.getAllRooms());
         roomFilterComboBox.setItems(roomsList);
         editRoom.setItems(roomsList);
     }
 
+    /**
+     * Loads collections and sets up filtering and sorting.
+     */
     private void loadFilteredCollections() {
         masterList = FXCollections.observableArrayList(collectionsCRUD.getAllCollections());
         filteredData = new FilteredList<>(masterList, p -> true);
 
+        // Filter listeners
         filterTextField.textProperty().addListener((obs, oldVal, newVal) -> applyFilter());
         roomFilterComboBox.valueProperty().addListener((obs, oldVal, newVal) -> applyFilter());
 
@@ -105,6 +125,9 @@ public class CollectionManagerController implements Initializable {
         collectionsTable.setItems(sortedList);
     }
 
+    /**
+     * Applies filters on the collection list based on text and room.
+     */
     private void applyFilter() {
         String text = filterTextField.getText() == null ? "" : filterTextField.getText().toLowerCase();
         Rooms selectedRoom = roomFilterComboBox.getValue();
@@ -124,6 +147,9 @@ public class CollectionManagerController implements Initializable {
         roomFilterComboBox.setValue(null);
     }
 
+    /**
+     * Populates the edit fields with data from the selected collection.
+     */
     private void populateEditFields(Collections c) {
         editName.setText(c.getName());
         editDescription.setText(c.getDescription());
@@ -131,6 +157,9 @@ public class CollectionManagerController implements Initializable {
         editRoom.setValue(c.getRooms());
     }
 
+    /**
+     * Clears all edit fields.
+     */
     private void clearEditFields() {
         editName.clear();
         editDescription.clear();
@@ -138,6 +167,9 @@ public class CollectionManagerController implements Initializable {
         editRoom.setValue(null);
     }
 
+    /**
+     * Disables all edit fields.
+     */
     private void disableAllEditFields() {
         editName.setDisable(true);
         editDescription.setDisable(true);
@@ -145,6 +177,9 @@ public class CollectionManagerController implements Initializable {
         editRoom.setDisable(true);
     }
 
+    /**
+     * Enables all edit fields.
+     */
     private void enableAllEditFields() {
         editName.setDisable(false);
         editDescription.setDisable(false);
@@ -257,6 +292,9 @@ public class CollectionManagerController implements Initializable {
         clearEditFields();
     }
 
+    /**
+     * Shows an informational alert with the given message.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

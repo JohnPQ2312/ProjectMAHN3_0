@@ -16,8 +16,8 @@
         <Label layoutX="363.0" layoutY="70.0" text="a" />
         <DatePicker fx:id="endDatePicker" layoutX="380.0" layoutY="66.0" />
 
-        <Button fx:id="generateButton" layoutX="600.0" layoutY="66.0" text="GENERAR REPORTE" />
-        <Button fx:id="exportPdfButton" disable="true" layoutX="780.0" layoutY="66.0" text="EXPORTAR A PDF" />
+        <Button fx:id="generateButton" layoutX="600.0" layoutY="66.0" onAction="#generateReport" text="GENERAR REPORTE" />
+        <Button fx:id="exportPdfButton" disable="true" layoutX="780.0" layoutY="66.0" onAction="#exportToPDF" text="EXPORTAR A PDF" />
 
         <TableView fx:id="salesTable" layoutX="177.0" layoutY="119.0" prefHeight="500.0" prefWidth="647.0">
             <columns>

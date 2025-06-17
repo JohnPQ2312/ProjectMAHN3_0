@@ -12,15 +12,15 @@
         <Label layoutX="350.0" layoutY="20.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="REPORTE DE VALORACIÓN DE SALAS" />
 
         <Label layoutX="60.0" layoutY="70.0" text="Museo:" />
-        <ComboBox fx:id="museumComboBox" layoutX="130.0" layoutY="66.0" prefHeight="25.0" prefWidth="200.0" promptText="Seleccione museo" />
+        <ComboBox fx:id="filterMuseumComboBox" layoutX="130.0" layoutY="66.0" prefHeight="25.0" prefWidth="200.0" promptText="Seleccione museo" />
 
         <Label layoutX="375.0" layoutY="70.0" text="Ordenar por:" />
         <ComboBox fx:id="orderComboBox" layoutX="465.0" layoutY="66.0" prefWidth="200.0" />
 
-        <Button fx:id="generateButton" layoutX="708.0" layoutY="66.0" text="GENERAR REPORTE" />
-        <Button fx:id="exportPdfButton" disable="true" layoutX="858.0" layoutY="66.0" text="EXPORTAR A PDF" />
+        <Button fx:id="generateButton" layoutX="708.0" layoutY="66.0" onAction="#generateReport" text="GENERAR REPORTE" />
+        <Button fx:id="exportPdfButton" disable="true" layoutX="858.0" layoutY="66.0" onAction="#exportToPDF" text="EXPORTAR A PDF" />
 
-        <TableView fx:id="roomRatingsTable" layoutX="60.0" layoutY="120.0" prefHeight="500.0" prefWidth="880.0">
+        <TableView fx:id="roomRatingsTable" layoutX="60.0" layoutY="150.0" prefHeight="470.0" prefWidth="880.0">
             <columns>
                 <TableColumn fx:id="roomColumn" prefWidth="200.0" text="Sala" />
                 <TableColumn fx:id="museumColumn" prefWidth="200.0" text="Museo" />
@@ -28,5 +28,6 @@
                 <TableColumn fx:id="reviewCountColumn" prefWidth="150.0" text="Cantidad de Reseñas" />
             </columns>
         </TableView>
+      <Button fx:id="cleanFilterBtn" layoutX="60.0" layoutY="106.0" mnemonicParsing="false" onAction="#resetFilters" text="LIMPIAR FILTROS" />
     </children>
 </AnchorPane>
